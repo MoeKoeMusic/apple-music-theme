@@ -1,0 +1,1597 @@
+﻿html.mk-apple-layout-enabled {
+  --primary-color: #fa233b !important;
+  --secondary-color: #ffe7eb !important;
+  --text-color: #11131a !important;
+  --background-color: #f5f6f9 !important;
+  --background-color-secondary: rgba(255, 255, 255, 0.74) !important;
+  --color-primary: #fa233b !important;
+  --color-primary-light: rgba(250, 35, 59, 0.14) !important;
+  --border-color: rgba(17, 19, 26, 0.08) !important;
+  --hover-color: rgba(17, 19, 26, 0.05) !important;
+  --color-secondary-bg-for-transparent: rgba(17, 19, 26, 0.06) !important;
+  --color-box-shadow: rgba(17, 19, 26, 0.12) !important;
+  --mk-apple-ink: 17, 19, 26;
+  --mk-apple-sidebar-width: 252px;
+  --mk-apple-shell-gap: 18px;
+  --mk-apple-radius-xl: 32px;
+  --mk-apple-radius-lg: 24px;
+  --mk-apple-radius-md: 18px;
+  --mk-apple-blur: 22px;
+  --mk-apple-surface: rgba(255, 255, 255, 0.78);
+  --mk-apple-surface-strong: rgba(255, 255, 255, 0.92);
+  --mk-apple-surface-soft: rgba(255, 255, 255, 0.62);
+  --mk-apple-border: rgba(255, 255, 255, 0.58);
+  --mk-apple-shadow: 0 20px 54px rgba(17, 19, 26, 0.12);
+  --mk-apple-shadow-soft: 0 12px 30px rgba(17, 19, 26, 0.08);
+  --mk-apple-text-subtle: rgba(var(--mk-apple-ink), 0.6);
+  --mk-apple-line: rgba(var(--mk-apple-ink), 0.08);
+  --mk-apple-chip: rgba(var(--mk-apple-ink), 0.05);
+  --mk-apple-cover-scale: 1.06;
+}
+
+html.dark.mk-apple-layout-enabled {
+  --secondary-color: rgba(255, 255, 255, 0.12) !important;
+  --text-color: #f5f5f7 !important;
+  --background-color: #101114 !important;
+  --background-color-secondary: rgba(34, 35, 40, 0.7) !important;
+  --border-color: rgba(245, 245, 247, 0.08) !important;
+  --hover-color: rgba(245, 245, 247, 0.08) !important;
+  --color-secondary-bg-for-transparent: rgba(245, 245, 247, 0.08) !important;
+  --color-box-shadow: rgba(0, 0, 0, 0.26) !important;
+  --mk-apple-ink: 245, 245, 247;
+  --mk-apple-surface: rgba(24, 25, 31, 0.78);
+  --mk-apple-surface-strong: rgba(31, 32, 38, 0.92);
+  --mk-apple-surface-soft: rgba(31, 32, 38, 0.66);
+  --mk-apple-border: rgba(255, 255, 255, 0.08);
+  --mk-apple-shadow: 0 20px 54px rgba(0, 0, 0, 0.3);
+  --mk-apple-shadow-soft: 0 12px 30px rgba(0, 0, 0, 0.24);
+}
+
+html.mk-apple-layout-enabled,
+html.mk-apple-layout-enabled body,
+html.mk-apple-layout-enabled #app {
+  min-height: 100%;
+}
+
+html.mk-apple-layout-enabled body {
+  background: transparent !important;
+  color: var(--text-color) !important;
+}
+
+html.mk-apple-layout-enabled .titlebar {
+  backdrop-filter: blur(16px) saturate(1.15);
+  -webkit-backdrop-filter: blur(16px) saturate(1.15);
+}
+
+html.mk-apple-layout-enabled header {
+  position: fixed !important;
+  top: 48px !important;
+  left: var(--mk-apple-shell-gap) !important;
+  bottom: var(--mk-apple-shell-gap) !important;
+  width: var(--mk-apple-sidebar-width) !important;
+  padding: 0 !important;
+  background: var(--mk-apple-surface) !important;
+  border: 1px solid var(--mk-apple-border) !important;
+  border-radius: calc(var(--mk-apple-radius-xl) + 4px) !important;
+  box-shadow: var(--mk-apple-shadow) !important;
+  backdrop-filter: blur(var(--mk-apple-blur)) saturate(1.3) !important;
+  -webkit-backdrop-filter: blur(var(--mk-apple-blur)) saturate(1.3) !important;
+  overflow: visible !important;
+}
+
+html.mk-apple-layout-enabled header::after {
+  content: none;
+  position: absolute;
+  top: 24px;
+  left: 22px;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--mk-apple-text-subtle);
+  pointer-events: none;
+}
+
+html.mk-apple-layout-enabled header .navigation {
+  display: flex !important;
+  align-items: stretch !important;
+}
+
+html.mk-apple-layout-enabled header > .navigation,
+html.mk-apple-layout-enabled header nav.navigation {
+  flex-direction: column !important;
+  justify-content: flex-start !important;
+  gap: 18px !important;
+  height: 100% !important;
+  max-width: none !important;
+  margin: 0 !important;
+  padding: 54px 18px 18px !important;
+}
+
+html.mk-apple-layout-enabled header nav.navigation > .navigation {
+  order: 3;
+  display: grid !important;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px !important;
+  margin-top: auto !important;
+  padding-top: 14px !important;
+  border-top: 1px solid var(--mk-apple-line);
+}
+
+html.mk-apple-layout-enabled header .search-profile {
+  order: 1;
+  flex-direction: column !important;
+  align-items: stretch !important;
+  gap: 14px !important;
+}
+
+html.mk-apple-layout-enabled header .nav-links {
+  order: 2;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: stretch !important;
+  justify-content: flex-start !important;
+  gap: 6px !important;
+  flex-grow: 0 !important;
+}
+
+html.mk-apple-layout-enabled header .nav-links a {
+  display: flex !important;
+  align-items: center !important;
+  gap: 12px !important;
+  margin: 0 !important;
+  padding: 14px 16px !important;
+  border-radius: 18px !important;
+  color: var(--text-color) !important;
+  font-size: 15px !important;
+  font-weight: 600 !important;
+  background: transparent !important;
+  transition: transform 0.2s ease, background-color 0.2s ease, color 0.2s ease !important;
+}
+
+html.mk-apple-layout-enabled header .nav-links a::before {
+  content: "";
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: currentColor;
+  opacity: 0.24;
+  flex: 0 0 auto;
+}
+
+html.mk-apple-layout-enabled header .nav-links a.active {
+  color: var(--color-primary) !important;
+  background: linear-gradient(135deg, rgba(250, 35, 59, 0.14), rgba(255, 255, 255, 0.4)) !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.8);
+}
+
+html.mk-apple-layout-enabled header .nav-links a.active::before {
+  opacity: 1;
+}
+
+html.mk-apple-layout-enabled header .nav-links a:hover {
+  transform: translateX(2px);
+  background: var(--mk-apple-chip) !important;
+}
+
+html.mk-apple-layout-enabled header .search-bar {
+  width: 100%;
+}
+
+html.mk-apple-layout-enabled header .search-bar input {
+  width: 100% !important;
+  padding: 12px 16px !important;
+  border-radius: 16px !important;
+  border: 1px solid var(--mk-apple-line) !important;
+  background: var(--mk-apple-surface-strong) !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.78) !important;
+  color: var(--text-color) !important;
+}
+
+html.mk-apple-layout-enabled header .search-bar input:focus {
+  width: 100% !important;
+  border-color: rgba(250, 35, 59, 0.28) !important;
+  outline: none !important;
+}
+
+html.mk-apple-layout-enabled header .search-bar input::placeholder {
+  color: var(--mk-apple-text-subtle);
+}
+
+html.mk-apple-layout-enabled header .profile {
+  width: 100% !important;
+  min-height: 68px;
+  height: auto !important;
+  padding: 10px 12px !important;
+  border-radius: 20px !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 12px !important;
+  box-sizing: border-box;
+  background: linear-gradient(135deg, rgba(250, 35, 59, 0.14), var(--mk-apple-surface-soft)) !important;
+  box-shadow: var(--mk-apple-shadow-soft) !important;
+}
+
+html.mk-apple-layout-enabled header .profile::after {
+  content: none;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-color);
+}
+
+html.mk-apple-layout-enabled header .profile img {
+  width: 44px !important;
+  height: 44px !important;
+  border-radius: 14px !important;
+}
+
+html.mk-apple-layout-enabled header .nav-arrow {
+  width: 100% !important;
+  aspect-ratio: 1 / 1;
+  margin: 0 !important;
+  padding: 0 !important;
+  border-radius: 16px !important;
+  background: var(--mk-apple-surface-strong) !important;
+  box-shadow: var(--mk-apple-shadow-soft) !important;
+  color: var(--text-color) !important;
+}
+
+html.mk-apple-layout-enabled header .nav-arrow i {
+  font-size: 15px !important;
+  color: inherit !important;
+}
+
+html.mk-apple-layout-enabled header .nav-arrow:hover:not(:disabled) {
+  background: rgba(250, 35, 59, 0.12) !important;
+  color: var(--color-primary) !important;
+}
+
+html.mk-apple-layout-enabled header .nav-arrow:disabled {
+  opacity: 0.45;
+}
+
+html.mk-apple-layout-enabled main {
+  position: relative !important;
+  min-height: calc(100vh - 36px) !important;
+  max-width: none !important;
+  margin: 18px 18px 190px calc(var(--mk-apple-sidebar-width) + 36px) !important;
+  padding: 28px !important;
+  border-radius: calc(var(--mk-apple-radius-xl) + 6px) !important;
+  background: var(--mk-apple-surface) !important;
+  border: 1px solid var(--mk-apple-border) !important;
+  box-shadow: var(--mk-apple-shadow) !important;
+  backdrop-filter: blur(calc(var(--mk-apple-blur) * 0.8)) saturate(1.2) !important;
+  -webkit-backdrop-filter: blur(calc(var(--mk-apple-blur) * 0.8)) saturate(1.2) !important;
+  overflow: visible !important;
+}
+
+html.mk-apple-layout-enabled main > * {
+  position: relative;
+  z-index: 1;
+}
+
+html.mk-apple-layout-enabled .container {
+  max-width: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+html.mk-apple-layout-enabled .section-title,
+html.mk-apple-layout-enabled .header h1,
+html.mk-apple-layout-enabled .track-list-title,
+html.mk-apple-layout-enabled .settings-content h2 {
+  color: var(--text-color) !important;
+  letter-spacing: -0.03em !important;
+}
+
+html.mk-apple-layout-enabled .section-title {
+  font-size: clamp(24px, 2vw, 34px) !important;
+  margin: 0 0 18px !important;
+}
+html.mk-apple-layout-enabled .recommend-card,
+html.mk-apple-layout-enabled .playlist-entry,
+html.mk-apple-layout-enabled .ranking-entry,
+html.mk-apple-layout-enabled .music-card,
+html.mk-apple-layout-enabled .playlist-item,
+html.mk-apple-layout-enabled .playlist-card,
+html.mk-apple-layout-enabled .artist-card,
+html.mk-apple-layout-enabled .album-card,
+html.mk-apple-layout-enabled .market-item,
+html.mk-apple-layout-enabled .setting-card,
+html.mk-apple-layout-enabled .track-list-container,
+html.mk-apple-layout-enabled .queue-popup,
+html.mk-apple-layout-enabled .context-menu,
+html.mk-apple-layout-enabled .submenu,
+html.mk-apple-layout-enabled .playlist-select-modal,
+html.mk-apple-layout-enabled .modal-content,
+html.mk-apple-layout-enabled .search-loading-spinner,
+html.mk-apple-layout-enabled .batch-actions-menu,
+html.mk-apple-layout-enabled .speed-menu,
+html.mk-apple-layout-enabled .quality-menu,
+html.mk-apple-layout-enabled .extension-item {
+  background: var(--mk-apple-surface-strong) !important;
+  border: 1px solid var(--mk-apple-line) !important;
+  border-radius: var(--mk-apple-radius-lg) !important;
+  box-shadow: var(--mk-apple-shadow-soft) !important;
+  backdrop-filter: blur(calc(var(--mk-apple-blur) * 0.6)) saturate(1.2) !important;
+  -webkit-backdrop-filter: blur(calc(var(--mk-apple-blur) * 0.6)) saturate(1.2) !important;
+}
+
+html.mk-apple-layout-enabled .music-card,
+html.mk-apple-layout-enabled .playlist-item,
+html.mk-apple-layout-enabled .playlist-card,
+html.mk-apple-layout-enabled .artist-card,
+html.mk-apple-layout-enabled .album-card,
+html.mk-apple-layout-enabled .recommend-card,
+html.mk-apple-layout-enabled .market-item {
+  transition: transform 0.22s ease, box-shadow 0.22s ease !important;
+}
+
+html.mk-apple-layout-enabled .music-card:hover,
+html.mk-apple-layout-enabled .playlist-item:hover,
+html.mk-apple-layout-enabled .playlist-card:hover,
+html.mk-apple-layout-enabled .artist-card:hover,
+html.mk-apple-layout-enabled .album-card:hover,
+html.mk-apple-layout-enabled .recommend-card:hover,
+html.mk-apple-layout-enabled .market-item:hover {
+  transform: translateY(-4px) !important;
+  box-shadow: 0 18px 42px rgba(17, 19, 26, 0.12) !important;
+}
+
+html.mk-apple-layout-enabled .music-card img,
+html.mk-apple-layout-enabled .playlist-cover,
+html.mk-apple-layout-enabled .playlist-cover img,
+html.mk-apple-layout-enabled .album-image,
+html.mk-apple-layout-enabled .music-image,
+html.mk-apple-layout-enabled .album-cover,
+html.mk-apple-layout-enabled .cover-art,
+html.mk-apple-layout-enabled .artist-avatar img,
+html.mk-apple-layout-enabled .album-cover img,
+html.mk-apple-layout-enabled .cover-art img {
+  border-radius: 22px !important;
+}
+
+html.mk-apple-layout-enabled .song-item,
+html.mk-apple-layout-enabled .track-list .li,
+html.mk-apple-layout-enabled .queue-item {
+  border-radius: 18px !important;
+  border: 1px solid var(--mk-apple-line) !important;
+  background: rgba(255, 255, 255, 0.72) !important;
+  box-shadow: 0 8px 20px rgba(17, 19, 26, 0.05) !important;
+}
+
+html.dark.mk-apple-layout-enabled .song-item,
+html.dark.mk-apple-layout-enabled .track-list .li,
+html.dark.mk-apple-layout-enabled .queue-item {
+  background: rgba(36, 38, 44, 0.72) !important;
+}
+
+html.mk-apple-layout-enabled .song-item,
+html.mk-apple-layout-enabled .track-list .li {
+  margin-bottom: 10px !important;
+}
+
+html.mk-apple-layout-enabled .song-item {
+  padding: 10px 12px !important;
+}
+
+html.mk-apple-layout-enabled .track-list .li {
+  padding-inline: 14px !important;
+}
+
+html.mk-apple-layout-enabled .track-list-header-row {
+  position: sticky !important;
+  top: 0 !important;
+  z-index: 4 !important;
+  margin-bottom: 10px !important;
+  background: var(--mk-apple-surface-strong) !important;
+  border: 1px solid var(--mk-apple-line) !important;
+  border-radius: 18px !important;
+  box-shadow: 0 10px 24px rgba(17, 19, 26, 0.06) !important;
+  backdrop-filter: blur(14px) saturate(1.15) !important;
+  -webkit-backdrop-filter: blur(14px) saturate(1.15) !important;
+}
+
+html.mk-apple-layout-enabled .track-list {
+  padding-top: 8px !important;
+}
+
+html.mk-apple-layout-enabled .track-title,
+html.mk-apple-layout-enabled .track-title-text,
+html.mk-apple-layout-enabled .queue-song-title,
+html.mk-apple-layout-enabled .playlist-title,
+html.mk-apple-layout-enabled .album-name {
+  color: var(--text-color) !important;
+}
+
+html.mk-apple-layout-enabled .artist,
+html.mk-apple-layout-enabled .track-artist,
+html.mk-apple-layout-enabled .track-album,
+html.mk-apple-layout-enabled .track-size,
+html.mk-apple-layout-enabled .track-timelen,
+html.mk-apple-layout-enabled .queue-artist,
+html.mk-apple-layout-enabled .song-artist,
+html.mk-apple-layout-enabled .playlist-description,
+html.mk-apple-layout-enabled .singer-name {
+  color: var(--mk-apple-text-subtle) !important;
+}
+
+html.mk-apple-layout-enabled button,
+html.mk-apple-layout-enabled .extension-btn,
+html.mk-apple-layout-enabled .tab-btn,
+html.mk-apple-layout-enabled .action-button,
+html.mk-apple-layout-enabled .category-tabs button,
+html.mk-apple-layout-enabled .view-mode-btn,
+html.mk-apple-layout-enabled .batch-select-btn,
+html.mk-apple-layout-enabled .sort-btn,
+html.mk-apple-layout-enabled .play-btn,
+html.mk-apple-layout-enabled .quality-badge {
+  border-radius: 999px !important;
+}
+
+html.mk-apple-layout-enabled .extension-btn,
+html.mk-apple-layout-enabled .tab-btn,
+html.mk-apple-layout-enabled .category-tabs button,
+html.mk-apple-layout-enabled .view-mode-btn,
+html.mk-apple-layout-enabled .batch-select-btn,
+html.mk-apple-layout-enabled .sort-btn,
+html.mk-apple-layout-enabled .play-btn,
+html.mk-apple-layout-enabled .action-button {
+  border: 1px solid var(--mk-apple-line) !important;
+  background: var(--mk-apple-surface-strong) !important;
+  box-shadow: var(--mk-apple-shadow-soft) !important;
+  color: var(--text-color) !important;
+}
+
+html.mk-apple-layout-enabled .extension-btn.primary,
+html.mk-apple-layout-enabled .extension-btn.success,
+html.mk-apple-layout-enabled .tab-btn.active,
+html.mk-apple-layout-enabled .category-tabs button.active,
+html.mk-apple-layout-enabled .play-btn,
+html.mk-apple-layout-enabled .action-button {
+  background: linear-gradient(135deg, #ff556d, #fa233b) !important;
+  border-color: rgba(250, 35, 59, 0.35) !important;
+  color: #fff !important;
+}
+
+html.mk-apple-layout-enabled input[type="text"],
+html.mk-apple-layout-enabled input[type="search"],
+html.mk-apple-layout-enabled .market-search input {
+  border-radius: 16px !important;
+  border: 1px solid var(--mk-apple-line) !important;
+  background: var(--mk-apple-surface-strong) !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.8) !important;
+  color: var(--text-color) !important;
+}
+html.mk-apple-layout-enabled .player-container {
+  left: calc(var(--mk-apple-sidebar-width) + 36px) !important;
+  right: 18px !important;
+  bottom: 18px !important;
+  width: auto !important;
+  padding: 10px 14px 14px !important;
+  border-radius: calc(var(--mk-apple-radius-xl) + 2px) !important;
+  border: 1px solid var(--mk-apple-border) !important;
+  background: var(--mk-apple-surface) !important;
+  box-shadow: var(--mk-apple-shadow) !important;
+  backdrop-filter: blur(calc(var(--mk-apple-blur) * 0.85)) saturate(1.25) !important;
+  -webkit-backdrop-filter: blur(calc(var(--mk-apple-blur) * 0.85)) saturate(1.25) !important;
+  overflow: hidden !important;
+  z-index: 12 !important;
+}
+
+html.mk-apple-layout-enabled .player-bar {
+  max-width: none !important;
+  padding: 18px 20px 10px !important;
+  gap: 18px !important;
+}
+
+html.mk-apple-layout-enabled .progress-bar {
+  background: rgba(var(--mk-apple-ink), 0.12) !important;
+  border-radius: 999px !important;
+}
+
+html.mk-apple-layout-enabled .progress {
+  background: linear-gradient(90deg, #ff566e, #fa233b) !important;
+  border-radius: 999px !important;
+}
+
+html.mk-apple-layout-enabled .progress-handle {
+  background: #fff !important;
+  border-color: rgba(250, 35, 59, 0.9) !important;
+  box-shadow: 0 0 0 4px rgba(250, 35, 59, 0.16) !important;
+}
+
+html.mk-apple-layout-enabled .album-art {
+  width: 68px !important;
+  height: 68px !important;
+  border-radius: 20px !important;
+  background: linear-gradient(135deg, rgba(250, 35, 59, 0.16), rgba(255, 255, 255, 0.34)) !important;
+  box-shadow: 0 18px 34px rgba(17, 19, 26, 0.18) !important;
+  overflow: hidden !important;
+}
+
+html.mk-apple-layout-enabled .album-art img {
+  width: 100% !important;
+  height: 100% !important;
+  border-radius: inherit !important;
+  object-fit: cover !important;
+  transform: scale(var(--mk-apple-cover-scale)) !important;
+}
+
+html.mk-apple-layout-enabled .song-info {
+  max-width: 340px !important;
+}
+
+html.mk-apple-layout-enabled .song-title {
+  font-size: 15px !important;
+}
+
+html.mk-apple-layout-enabled .controls .control-btn,
+html.mk-apple-layout-enabled .extra-btn {
+  width: 40px !important;
+  height: 40px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border-radius: 999px !important;
+  background: var(--mk-apple-chip) !important;
+  color: var(--text-color) !important;
+}
+
+html.mk-apple-layout-enabled .controls .control-btn:nth-child(2) {
+  width: 54px !important;
+  height: 54px !important;
+  background: linear-gradient(135deg, #ff566e, #fa233b) !important;
+  color: #fff !important;
+  box-shadow: 0 14px 30px rgba(250, 35, 59, 0.28) !important;
+}
+
+html.mk-apple-layout-enabled .controls .control-btn:hover,
+html.mk-apple-layout-enabled .extra-btn:hover {
+  transform: translateY(-1px) !important;
+}
+
+html.mk-apple-layout-enabled .volume-slider {
+  background: rgba(var(--mk-apple-ink), 0.12) !important;
+}
+
+html.mk-apple-layout-enabled .volume-progress {
+  background: linear-gradient(90deg, #ff566e, #fa233b) !important;
+}
+
+html.mk-apple-layout-enabled .queue-popup {
+  right: 18px !important;
+  bottom: 128px !important;
+  width: 340px !important;
+  max-height: 480px !important;
+  padding: 12px !important;
+}
+
+html.mk-apple-layout-enabled .queue-header {
+  background: transparent !important;
+  box-shadow: none !important;
+  border-bottom: 1px solid var(--mk-apple-line);
+  padding-bottom: 10px !important;
+  margin-bottom: 10px !important;
+}
+
+html.mk-apple-layout-enabled .context-menu,
+html.mk-apple-layout-enabled .submenu {
+  padding: 8px !important;
+}
+
+html.mk-apple-layout-enabled .context-menu li,
+html.mk-apple-layout-enabled .submenu li {
+  border-radius: 12px !important;
+  color: var(--text-color) !important;
+}
+
+html.mk-apple-layout-enabled .context-menu li:hover,
+html.mk-apple-layout-enabled .submenu li:hover {
+  background: var(--mk-apple-chip) !important;
+}
+
+html.mk-apple-layout-enabled .modal-overlay {
+  background: rgba(9, 10, 13, 0.42) !important;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+html.mk-apple-layout-enabled .album-art,
+html.mk-apple-layout-enabled .album-art-large img,
+html.mk-apple-layout-enabled .vinyl-cover {
+  box-shadow: 0 24px 48px rgba(17, 19, 26, 0.24) !important;
+}
+
+html.mk-apple-layout-enabled .album-art-large img,
+html.mk-apple-layout-enabled .vinyl-cover {
+  transform: scale(var(--mk-apple-cover-scale)) !important;
+}
+
+@media (max-width: 1180px) {
+  html.mk-apple-layout-enabled {
+    --mk-apple-sidebar-width: 224px;
+  }
+}
+
+@media (max-width: 840px) {
+  html.mk-apple-layout-enabled header {
+    top: 18px !important;
+    left: 18px !important;
+    right: 18px !important;
+    bottom: auto !important;
+    width: auto !important;
+  }
+
+  html.mk-apple-layout-enabled header::after {
+    top: 18px;
+  }
+
+  html.mk-apple-layout-enabled header > .navigation,
+  html.mk-apple-layout-enabled header nav.navigation {
+    flex-direction: row !important;
+    flex-wrap: wrap !important;
+    align-items: center !important;
+    gap: 12px !important;
+    padding: 42px 16px 16px !important;
+  }
+
+  html.mk-apple-layout-enabled header .nav-links {
+    order: 1;
+    flex: 1 1 100%;
+    flex-direction: row !important;
+    flex-wrap: wrap !important;
+  }
+
+  html.mk-apple-layout-enabled header .search-profile {
+    order: 2;
+    flex: 1 1 calc(100% - 156px);
+    flex-direction: row !important;
+    align-items: center !important;
+  }
+
+  html.mk-apple-layout-enabled header .search-bar {
+    flex: 1 1 auto;
+  }
+
+  html.mk-apple-layout-enabled header .profile {
+    width: auto !important;
+    min-width: 60px;
+  }
+
+  html.mk-apple-layout-enabled header .profile::after {
+    display: none;
+  }
+
+  html.mk-apple-layout-enabled header nav.navigation > .navigation {
+    order: 3;
+    display: flex !important;
+    grid-template-columns: none !important;
+    gap: 8px !important;
+    width: auto;
+    margin-top: 0 !important;
+    margin-left: auto !important;
+    padding-top: 0 !important;
+    border-top: none !important;
+  }
+
+  html.mk-apple-layout-enabled header .nav-arrow {
+    width: 40px !important;
+    height: 40px !important;
+    aspect-ratio: auto !important;
+  }
+
+  html.mk-apple-layout-enabled main {
+    margin: 150px 18px 190px !important;
+  }
+
+  html.mk-apple-layout-enabled .player-container {
+    left: 18px !important;
+  }
+}
+
+@media (max-width: 760px) {
+  html.mk-apple-layout-enabled .player-bar {
+    flex-wrap: wrap !important;
+  }
+
+  html.mk-apple-layout-enabled .song-info {
+    flex: 1 1 calc(100% - 86px) !important;
+    max-width: none !important;
+  }
+
+  html.mk-apple-layout-enabled .controls,
+  html.mk-apple-layout-enabled .extra-controls {
+    width: 100% !important;
+  }
+
+  html.mk-apple-layout-enabled .controls {
+    justify-content: center !important;
+  }
+
+  html.mk-apple-layout-enabled .extra-controls {
+    justify-content: flex-start !important;
+    flex-wrap: wrap !important;
+  }
+
+  html.mk-apple-layout-enabled .queue-popup {
+    left: 18px !important;
+    width: auto !important;
+  }
+}
+
+@media (min-width: 841px) {
+  html.mk-apple-layout-enabled {
+    --mk-apple-sidebar-effective: min(var(--mk-apple-sidebar-width), 224px);
+  }
+
+  html.mk-apple-layout-enabled header {
+    width: var(--mk-apple-sidebar-effective) !important;
+    bottom: auto !important;
+    height: auto !important;
+    max-height: calc(100vh - 156px) !important;
+  }
+
+  html.mk-apple-layout-enabled header > .navigation,
+  html.mk-apple-layout-enabled header nav.navigation {
+    gap: 14px !important;
+    padding: 52px 16px 16px !important;
+  }
+
+  html.mk-apple-layout-enabled header nav.navigation > .navigation {
+    margin-top: 8px !important;
+    grid-template-columns: repeat(3, 40px) !important;
+    justify-content: flex-start !important;
+    padding-top: 10px !important;
+  }
+
+  html.mk-apple-layout-enabled header .nav-arrow {
+    width: 40px !important;
+    height: 40px !important;
+    aspect-ratio: auto !important;
+  }
+
+  html.mk-apple-layout-enabled header .profile {
+    min-height: 60px !important;
+    padding: 8px 10px !important;
+    border-radius: 18px !important;
+  }
+
+  html.mk-apple-layout-enabled header .profile::after {
+    content: none;
+    font-size: 14px;
+  }
+
+  html.mk-apple-layout-enabled header .profile img {
+    width: 40px !important;
+    height: 40px !important;
+  }
+
+  html.mk-apple-layout-enabled header .nav-links {
+    gap: 4px !important;
+  }
+
+  html.mk-apple-layout-enabled header .nav-links a {
+    padding: 12px 14px !important;
+    font-size: 14px !important;
+  }
+
+  html.mk-apple-layout-enabled main {
+    margin: 18px 18px 146px calc(var(--mk-apple-sidebar-effective) + 32px) !important;
+  }
+
+  html.mk-apple-layout-enabled .section-title {
+    font-size: clamp(22px, 1.7vw, 30px) !important;
+    margin-bottom: 16px !important;
+  }
+
+  html.mk-apple-layout-enabled .section-title .mama {
+    height: 30px !important;
+    margin-left: 96px !important;
+  }
+
+  html.mk-apple-layout-enabled .recommendations {
+    display: grid !important;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)) !important;
+    gap: 18px !important;
+    margin-bottom: 28px !important;
+  }
+
+  html.mk-apple-layout-enabled .recommend-card {
+    width: auto !important;
+    min-width: 0 !important;
+    height: 184px !important;
+    border-radius: 26px !important;
+  }
+
+  html.mk-apple-layout-enabled .radio-card,
+  html.mk-apple-layout-enabled .ranking-content,
+  html.mk-apple-layout-enabled .playlist-entry {
+    padding: 14px !important;
+    box-sizing: border-box !important;
+  }
+
+  html.mk-apple-layout-enabled .radio-disc {
+    width: 102px !important;
+    height: 102px !important;
+  }
+
+  html.mk-apple-layout-enabled .playlist-icon {
+    width: 108px !important;
+    height: 108px !important;
+  }
+
+  html.mk-apple-layout-enabled .ranking-icon {
+    width: 92px !important;
+  }
+
+  html.mk-apple-layout-enabled .radio-title,
+  html.mk-apple-layout-enabled .ranking-title {
+    font-size: 18px !important;
+  }
+
+  html.mk-apple-layout-enabled .radio-subtitle,
+  html.mk-apple-layout-enabled .ranking-description {
+    font-size: 13px !important;
+  }
+
+  html.mk-apple-layout-enabled .song-list {
+    display: grid !important;
+    grid-template-columns: repeat(auto-fit, minmax(146px, 1fr)) !important;
+    gap: 14px !important;
+    margin-top: 0 !important;
+  }
+
+  html.mk-apple-layout-enabled .song-item {
+    width: auto !important;
+    min-width: 0 !important;
+    padding: 10px !important;
+    gap: 10px !important;
+    align-items: center !important;
+  }
+
+  html.mk-apple-layout-enabled .song-cover {
+    width: 46px !important;
+    height: 46px !important;
+    border-radius: 14px !important;
+  }
+
+  html.mk-apple-layout-enabled .song-info {
+    gap: 2px;
+  }
+
+  html.mk-apple-layout-enabled .song-title {
+    font-size: 14px !important;
+    color: var(--text-color) !important;
+  }
+
+  html.mk-apple-layout-enabled .song-artist {
+    font-size: 12px !important;
+  }
+
+  html.mk-apple-layout-enabled .playlist-grid {
+    display: grid !important;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)) !important;
+    gap: 16px !important;
+    justify-content: stretch !important;
+  }
+
+  html.mk-apple-layout-enabled .playlist-item {
+    width: auto !important;
+  }
+
+  html.mk-apple-layout-enabled .player-container {
+    left: calc(var(--mk-apple-sidebar-effective) + 32px) !important;
+    right: 18px !important;
+    bottom: 14px !important;
+    padding: 6px 10px 10px !important;
+    border-radius: 28px !important;
+  }
+
+  html.mk-apple-layout-enabled .player-bar {
+    padding: 10px 14px 6px !important;
+    gap: 12px !important;
+  }
+
+  html.mk-apple-layout-enabled .progress-bar {
+    height: 4px !important;
+  }
+
+  html.mk-apple-layout-enabled .progress-handle {
+    width: 10px !important;
+    height: 10px !important;
+  }
+
+  html.mk-apple-layout-enabled .album-art {
+    width: 56px !important;
+    height: 56px !important;
+    border-radius: 16px !important;
+  }
+
+  html.mk-apple-layout-enabled .song-info {
+    flex: 0 1 240px !important;
+    max-width: 240px !important;
+  }
+
+  html.mk-apple-layout-enabled .artist {
+    font-size: 12px !important;
+  }
+
+  html.mk-apple-layout-enabled .controls {
+    gap: 6px !important;
+  }
+
+  html.mk-apple-layout-enabled .controls .control-btn,
+  html.mk-apple-layout-enabled .extra-btn {
+    width: 34px !important;
+    height: 34px !important;
+  }
+
+  html.mk-apple-layout-enabled .controls .control-btn:nth-child(2) {
+    width: 46px !important;
+    height: 46px !important;
+  }
+
+  html.mk-apple-layout-enabled .extra-controls {
+    gap: 6px !important;
+  }
+
+  html.mk-apple-layout-enabled .volume-slider {
+    width: 76px !important;
+    height: 4px !important;
+  }
+
+  html.mk-apple-layout-enabled .queue-popup {
+    bottom: 102px !important;
+  }
+}
+
+html.mk-apple-layout-enabled header::after {
+  content: none !important;
+  display: none !important;
+}
+
+html.mk-apple-layout-enabled header nav.navigation > .navigation {
+  order: 0 !important;
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+  border-top: none !important;
+}
+
+html.mk-apple-layout-enabled header .search-profile {
+  order: 1 !important;
+}
+
+html.mk-apple-layout-enabled header .nav-links {
+  order: 2 !important;
+}
+
+@media (max-width: 840px) {
+  html.mk-apple-layout-enabled header nav.navigation > .navigation {
+    width: 100% !important;
+    margin-left: 0 !important;
+    justify-content: flex-start !important;
+  }
+
+  html.mk-apple-layout-enabled header .nav-links {
+    order: 1 !important;
+  }
+
+  html.mk-apple-layout-enabled header .search-profile {
+    order: 2 !important;
+  }
+}
+
+html.mk-apple-layout-enabled header .profile {
+  position: relative !important;
+  overflow: hidden !important;
+}
+
+html.mk-apple-layout-enabled header .profile::after {
+  content: none !important;
+  display: none !important;
+}
+
+html.mk-apple-layout-enabled header .profile .mk-apple-profile-name {
+  position: relative;
+  z-index: 1;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-color);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 120px;
+  pointer-events: none;
+}
+
+html.mk-apple-layout-enabled header .profile .mk-apple-profile-link {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  border-radius: inherit;
+}
+
+html.mk-apple-layout-enabled header .profile {
+  justify-content: flex-start !important;
+}
+
+html.mk-apple-layout-enabled header .profile .mk-apple-profile-name {
+  flex: 1 1 auto;
+  max-width: none !important;
+  padding-right: 8px;
+}
+
+html.mk-apple-layout-enabled header .profile .mk-apple-profile-link {
+  cursor: pointer;
+  -webkit-app-region: no-drag;
+}
+
+html.mk-apple-layout-enabled header .profile-menu {
+  display: none !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
+
+html.mk-apple-layout-enabled .mk-apple-account-links {
+  order: 3 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: stretch !important;
+  gap: 4px !important;
+  margin-top: 10px !important;
+  padding-top: 10px !important;
+  border-top: 1px solid var(--mk-apple-line) !important;
+}
+
+html.mk-apple-layout-enabled .mk-apple-side-link {
+  display: flex !important;
+  align-items: center !important;
+  gap: 12px !important;
+  width: 100% !important;
+  margin: 0 !important;
+  padding: 12px 14px !important;
+  border: none !important;
+  border-radius: 18px !important;
+  background: transparent !important;
+  color: var(--text-color) !important;
+  font: inherit !important;
+  font-size: 14px !important;
+  font-weight: 600 !important;
+  line-height: 1.3 !important;
+  text-decoration: none !important;
+  text-align: left !important;
+  cursor: pointer !important;
+  box-shadow: none !important;
+  -webkit-app-region: no-drag;
+}
+
+html.mk-apple-layout-enabled .mk-apple-side-link::before {
+  content: none !important;
+  display: none !important;
+}
+
+html.mk-apple-layout-enabled .mk-apple-side-link:hover {
+  transform: translateX(2px);
+  background: var(--mk-apple-chip) !important;
+}
+
+html.mk-apple-layout-enabled .mk-apple-side-link.active {
+  color: var(--color-primary) !important;
+  background: linear-gradient(135deg, rgba(250, 35, 59, 0.14), rgba(255, 255, 255, 0.4)) !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.8) !important;
+}
+
+html.mk-apple-layout-enabled .mk-apple-side-link i {
+  flex: 0 0 16px;
+  width: 16px;
+  text-align: center;
+  font-size: 14px !important;
+}
+
+html.mk-apple-layout-enabled .mk-apple-side-link .new-badge {
+  position: static !important;
+  inset: auto !important;
+  margin-left: auto !important;
+  padding: 1px 6px !important;
+  border-radius: 999px !important;
+  background: var(--color-primary) !important;
+  color: #fff !important;
+  font-size: 10px !important;
+  font-style: normal !important;
+  line-height: 1.4 !important;
+}
+
+@media (max-width: 840px) {
+  html.mk-apple-layout-enabled .mk-apple-account-links {
+    width: 100% !important;
+  }
+}
+
+html.mk-apple-layout-enabled .mk-apple-account-links {
+  position: relative !important;
+  z-index: 3 !important;
+  pointer-events: auto !important;
+}
+
+html.mk-apple-layout-enabled .mk-apple-side-link {
+  position: relative !important;
+  z-index: 1 !important;
+  pointer-events: auto !important;
+}
+
+html.mk-apple-layout-enabled .mk-apple-side-link > * {
+  pointer-events: none !important;
+}
+
+html.mk-apple-layout-enabled .titlebar {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  width: 100% !important;
+  height: 32px !important;
+  padding: 0 !important;
+  z-index: 30 !important;
+}
+
+html.mk-apple-layout-enabled .titlebar .window-controls {
+  position: fixed !important;
+  top: 6px !important;
+  right: 18px !important;
+  margin: 0 !important;
+  gap: 8px !important;
+  z-index: 31 !important;
+}
+
+html.mk-apple-layout-enabled header .search-profile,
+html.mk-apple-layout-enabled header .search-bar,
+html.mk-apple-layout-enabled header .nav-links,
+html.mk-apple-layout-enabled .mk-apple-account-links {
+  min-width: 0 !important;
+  max-width: 100% !important;
+}
+
+html.mk-apple-layout-enabled header .search-bar input,
+html.mk-apple-layout-enabled header .nav-links a,
+html.mk-apple-layout-enabled .mk-apple-side-link {
+  box-sizing: border-box !important;
+  max-width: 100% !important;
+}
+
+html.mk-apple-layout-enabled header .search-bar input {
+  display: block !important;
+  min-width: 0 !important;
+}
+
+html.mk-apple-layout-enabled header .nav-links a,
+html.mk-apple-layout-enabled .mk-apple-side-link {
+  width: 100% !important;
+  overflow: hidden !important;
+}
+
+html.mk-apple-layout-enabled header .nav-links a {
+  padding-right: 12px !important;
+}
+
+html.mk-apple-layout-enabled .mk-apple-side-link {
+  padding-right: 12px !important;
+}
+
+html.mk-apple-layout-enabled .mk-apple-side-link .new-badge {
+  flex: 0 0 auto !important;
+}
+
+@media (max-width: 840px) {
+  html.mk-apple-layout-enabled .titlebar .window-controls {
+    top: 6px !important;
+    right: 14px !important;
+  }
+}
+
+html.mk-apple-layout-enabled .player-container {
+  left: 18px !important;
+  right: 18px !important;
+  width: auto !important;
+}
+
+html.mk-apple-layout-enabled main:has(.settings-page) {
+  padding: 0 !important;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+html.mk-apple-layout-enabled main:has(.settings-page) > .settings-page {
+  height: auto !important;
+  min-height: calc(100vh - 210px) !important;
+  margin: 0 !important;
+}
+
+html.mk-apple-layout-enabled .player-container,
+html.mk-apple-layout-enabled .player-bar,
+html.mk-apple-layout-enabled .song-title-row,
+html.mk-apple-layout-enabled .quality-menu-wrapper,
+html.mk-apple-layout-enabled .playback-speed,
+html.mk-apple-layout-enabled .extra-controls {
+  overflow: visible !important;
+}
+
+html.mk-apple-layout-enabled .player-container {
+  z-index: 40 !important;
+}
+
+html.mk-apple-layout-enabled .quality-menu,
+html.mk-apple-layout-enabled .speed-menu,
+html.mk-apple-layout-enabled .time-tooltip,
+html.mk-apple-layout-enabled .queue-popup {
+  z-index: 41 !important;
+}
+
+html.mk-apple-layout-enabled #app {
+  position: relative !important;
+  isolation: isolate !important;
+}
+
+html.mk-apple-layout-enabled #app::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: -1;
+  background:
+    radial-gradient(circle at top left, rgba(255, 117, 140, 0.22), transparent 34%),
+    radial-gradient(circle at top right, rgba(255, 211, 96, 0.16), transparent 28%),
+    linear-gradient(180deg, #fbfbfd 0%, #f1f3f7 100%) !important;
+  background-repeat: no-repeat !important;
+  background-size: cover !important;
+}
+
+html.dark.mk-apple-layout-enabled #app::before {
+  background:
+    radial-gradient(circle at top left, rgba(250, 35, 59, 0.24), transparent 30%),
+    radial-gradient(circle at top right, rgba(255, 147, 56, 0.14), transparent 26%),
+    linear-gradient(180deg, #131418 0%, #090a0d 100%) !important;
+  background-repeat: no-repeat !important;
+  background-size: cover !important;
+}
+
+html.mk-apple-layout-enabled main {
+  margin-top: 48px !important;
+}
+
+@media (min-width: 841px) {
+  html.mk-apple-layout-enabled main > .container > .recommendations {
+    display: flex !important;
+    grid-template-columns: none !important;
+    gap: 35px !important;
+    margin-bottom: 40px !important;
+  }
+
+  html.mk-apple-layout-enabled main > .container > .recommendations > .recommend-card {
+    width: 400px !important;
+    height: 200px !important;
+    min-width: 0 !important;
+    border: none !important;
+    border-radius: 15px !important;
+    box-shadow: none !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    overflow: hidden !important;
+  }
+
+  html.mk-apple-layout-enabled main > .container > .recommendations > .recommend-card:hover {
+    transform: translateY(-5px) !important;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3) !important;
+  }
+
+  html.mk-apple-layout-enabled main > .container > .recommendations > .recommend-card.gradient-background {
+    background: linear-gradient(135deg, var(--primary-color), #8ff2ff) !important;
+  }
+
+  html.mk-apple-layout-enabled main > .container > .recommendations .radio-card,
+  html.mk-apple-layout-enabled main > .container > .recommendations .ranking-content,
+  html.mk-apple-layout-enabled main > .container > .recommendations .playlist-entry {
+    padding: 0 !important;
+    border: none !important;
+    box-shadow: none !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+
+  html.mk-apple-layout-enabled main > .container > .recommendations .ranking-entry {
+    background: linear-gradient(135deg, var(--primary-color), #9f92ff) !important;
+    border: none !important;
+    border-radius: 15px !important;
+    box-shadow: none !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+
+  html.mk-apple-layout-enabled main > .container > .recommendations .playlist-entry.gradient-background {
+    background: linear-gradient(135deg, var(--primary-color), #cfff82) !important;
+    border-radius: 15px !important;
+  }
+
+  html.mk-apple-layout-enabled main > .container > .recommendations .radio-disc {
+    width: 125px !important;
+    height: 125px !important;
+  }
+
+  html.mk-apple-layout-enabled main > .container > .recommendations .playlist-icon {
+    width: 144px !important;
+    height: 144px !important;
+  }
+
+  html.mk-apple-layout-enabled main > .container > .recommendations .ranking-icon {
+    width: 135px !important;
+  }
+
+  html.mk-apple-layout-enabled main > .container > .recommendations .ranking-title {
+    font-size: 24px !important;
+  }
+
+  html.mk-apple-layout-enabled main > .container > .recommendations .ranking-description {
+    font-size: 16px !important;
+  }
+
+  html.mk-apple-layout-enabled main > .container > .recommendations .radio-subtitle {
+    font-size: 15px !important;
+  }
+}
+
+html.mk-apple-layout-enabled .library-page > .profile-section + .section-title,
+html.mk-apple-layout-enabled .library-page > .favorite-section {
+  display: none !important;
+}
+
+html.mk-apple-layout-enabled .library-page, 
+html.mk-apple-layout-enabled .search-results, 
+html.mk-apple-layout-enabled .detail-page, html.mk-apple-layout-enabled .discover-page{
+  padding: 0 !important;
+}
+
+html.mk-apple-layout-enabled {
+  --mk-apple-player-clearance: 60px;
+}
+
+@media (max-width: 760px) {
+  html.mk-apple-layout-enabled {
+    --mk-apple-player-clearance: 60px;
+  }
+}
+
+html.mk-apple-layout-enabled #app {
+  padding-bottom: var(--mk-apple-player-clearance) !important;
+  box-sizing: border-box !important;
+}
+
+html.mk-apple-layout-enabled main {
+  margin-bottom: 18px !important;
+}
+
+html.mk-apple-layout-enabled .detail-page:has(.cover-art) .header {
+  align-items: center !important;
+  margin-bottom: 40px !important;
+  overflow: visible !important;
+}
+
+html.mk-apple-layout-enabled .detail-page:has(.cover-art) .info {
+  position: relative !important;
+  z-index: 2 !important;
+  overflow: visible !important;
+}
+
+html.mk-apple-layout-enabled .detail-page:has(.cover-art) .actions {
+  position: relative !important;
+  z-index: 3 !important;
+  overflow: visible !important;
+}
+
+html.mk-apple-layout-enabled .detail-page:has(.cover-art) .more-btn-container {
+  position: relative !important;
+  z-index: 4 !important;
+}
+
+html.mk-apple-layout-enabled .detail-page:has(.cover-art) .dropdown-menu {
+  position: absolute !important;
+  top: calc(100% + 8px) !important;
+  right: 0 !important;
+  left: auto !important;
+  min-width: 132px !important;
+  z-index: 60 !important;
+}
+
+html.mk-apple-layout-enabled .detail-page:has(.cover-art) .cover-art {
+  width: 200px !important;
+  height: 200px !important;
+  margin-right: 20px !important;
+  border-radius: 10px !important;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1) !important;
+  object-fit: cover !important;
+  transform: none !important;
+}
+
+html.mk-apple-layout-enabled .detail-page:has(.cover-art) .artist-avatar {
+  border-radius: 50% !important;
+}
+
+html.mk-apple-layout-enabled .detail-page:has(.cover-art) .title {
+  color: var(--primary-color) !important;
+  letter-spacing: normal !important;
+}
+
+html.mk-apple-layout-enabled .detail-page:has(.cover-art) .subtitle {
+  color: #666 !important;
+}
+
+html.mk-apple-layout-enabled .detail-page:has(.cover-art) .meta {
+  color: #999 !important;
+}
+
+html.mk-apple-layout-enabled .detail-page:has(.cover-art) .track-list-container {
+  margin-top: 30px !important;
+  background: transparent !important;
+  border: none !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+html.mk-apple-layout-enabled .detail-page:has(.cover-art) .track-list-title {
+  color: var(--primary-color) !important;
+  font-size: 24px !important;
+  margin-bottom: 10px !important;
+  letter-spacing: normal !important;
+}
+
+html.mk-apple-layout-enabled .detail-page:has(.cover-art) .track-list-actions {
+  gap: 10px !important;
+}
+
+html.mk-apple-layout-enabled .detail-page:has(.cover-art) .batch-action-btn,
+html.mk-apple-layout-enabled .detail-page:has(.cover-art) .view-mode-btn,
+html.mk-apple-layout-enabled .detail-page:has(.cover-art) .fav-btn,
+html.mk-apple-layout-enabled .detail-page:has(.cover-art) .more-btn {
+  background: transparent !important;
+  border: 1px solid var(--secondary-color) !important;
+  border-radius: 5px !important;
+  box-shadow: none !important;
+  color: var(--text-color) !important;
+}
+
+html.mk-apple-layout-enabled .detail-page:has(.cover-art) .primary-btn,
+html.mk-apple-layout-enabled .detail-page:has(.cover-art) .follow-btn {
+  background: #ff69b4 !important;
+  border: none !important;
+  border-radius: 5px !important;
+  box-shadow: none !important;
+  color: #fff !important;
+}
+
+html.mk-apple-layout-enabled .detail-page:has(.cover-art) .batch-action-btn.active,
+html.mk-apple-layout-enabled .detail-page:has(.cover-art) .sort-btn.active {
+  background: var(--primary-color) !important;
+  border-color: var(--primary-color) !important;
+  color: #fff !important;
+}
+
+html.mk-apple-layout-enabled .detail-page:has(.cover-art) .sort-selector {
+  border: 1px solid var(--secondary-color) !important;
+  border-radius: 5px !important;
+  overflow: hidden !important;
+}
+
+html.mk-apple-layout-enabled .detail-page:has(.cover-art) .sort-btn {
+  background: transparent !important;
+  border: none !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  color: var(--text-color) !important;
+}
+
+html.mk-apple-layout-enabled .detail-page:has(.cover-art) .search-input {
+  width: 250px !important;
+  padding: 8px 8px 8px 15px !important;
+  border: 1px solid var(--secondary-color) !important;
+  border-radius: 20px !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+html.mk-apple-layout-enabled .detail-page:has(.cover-art) .track-list-header-row {
+  position: static !important;
+  top: auto !important;
+  padding: 10px !important;
+  border: none !important;
+  border-bottom: 1px solid var(--primary-color) !important;
+  border-radius: 5px 5px 0 0 !important;
+  background: rgba(var(--primary-color-rgb), 0.1) !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+html.mk-apple-layout-enabled .detail-page:has(.cover-art) .track-list-header-row:hover {
+  background: rgba(var(--primary-color-rgb), 0.15) !important;
+}
+
+html.mk-apple-layout-enabled .detail-page:has(.cover-art) .track-list {
+  height: 800px !important;
+  padding-top: 0 !important;
+}
+
+html.mk-apple-layout-enabled .detail-page:has(.cover-art) .track-list .li {
+  margin-bottom: 0 !important;
+  padding: 10px !important;
+  border: none !important;
+  border-bottom: 1px solid #eee !important;
+  border-radius: 5px !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+html.mk-apple-layout-enabled .detail-page:has(.cover-art) .track-list .li:hover {
+  transform: none !important;
+  background: var(--background-color) !important;
+  box-shadow: none !important;
+}
+
+html.mk-apple-layout-enabled .detail-page:has(.cover-art) .li.cover-view {
+  height: 60px !important;
+  padding: 5px 10px !important;
+  border-radius: 5px !important;
+}
+
+html.mk-apple-layout-enabled .detail-page:has(.cover-art) .track-cover {
+  width: 50px !important;
+  height: 50px !important;
+  margin-right: 15px !important;
+  border-radius: 4px !important;
+}
+
+html.mk-apple-layout-enabled .detail-page:has(.cover-art) .more-btn,
+html.mk-apple-layout-enabled .detail-page:has(.cover-art) .dropdown-menu {
+  pointer-events: auto !important;
+}
+
+html.mk-apple-layout-enabled .detail-page:has(.cover-art) .actions > * {
+  position: relative !important;
+  z-index: 80 !important;
+}
+
+html.mk-apple-layout-enabled .mk-apple-side-link,
+html.mk-apple-layout-enabled header .profile-menu li a,
+html.mk-apple-layout-enabled .context-menu li,
+html.mk-apple-layout-enabled .submenu li,
+html.mk-apple-layout-enabled .dropdown-menu li,
+html.mk-apple-layout-enabled .batch-actions-menu li {
+  transition: transform 0.24s cubic-bezier(0.22, 1, 0.36, 1), background-color 0.24s ease, color 0.24s ease, box-shadow 0.24s ease, opacity 0.24s ease !important;
+}
+
+html.mk-apple-layout-enabled .mk-apple-side-link i,
+html.mk-apple-layout-enabled .mk-apple-side-link .new-badge,
+html.mk-apple-layout-enabled .context-menu li i,
+html.mk-apple-layout-enabled .submenu li i,
+html.mk-apple-layout-enabled .dropdown-menu li i,
+html.mk-apple-layout-enabled .batch-actions-menu li i {
+  transition: transform 0.24s cubic-bezier(0.22, 1, 0.36, 1), color 0.24s ease, opacity 0.24s ease !important;
+}
+
+html.mk-apple-layout-enabled .mk-apple-side-link:hover,
+html.mk-apple-layout-enabled .context-menu li:hover,
+html.mk-apple-layout-enabled .submenu li:hover,
+html.mk-apple-layout-enabled .dropdown-menu li:hover,
+html.mk-apple-layout-enabled .batch-actions-menu li:hover {
+  transform: translateX(3px) !important;
+}
+
+html.mk-apple-layout-enabled .mk-apple-side-link:hover i,
+html.mk-apple-layout-enabled .context-menu li:hover i,
+html.mk-apple-layout-enabled .submenu li:hover i,
+html.mk-apple-layout-enabled .dropdown-menu li:hover i,
+html.mk-apple-layout-enabled .batch-actions-menu li:hover i {
+  transform: translateX(1px) !important;
+}
+

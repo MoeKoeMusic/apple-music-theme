@@ -1,0 +1,47 @@
+{
+  "manifest_version": 3,
+  "name": "Apple Music 主题",
+  "plugin_id": "apple-music-theme",
+  "version": "1.0.0",
+  "minversion": "1.6.1",
+  "moekoe": true,
+  "author": {
+    "name": "MoeKoe Music",
+    "url": "https://music.moekoe.cn/"
+  },
+  "description": "将 MoeKoe Music 调整为 Apple Music 风格的侧边栏、毛玻璃内容区与悬浮播放器布局主题。",
+  "permissions": [
+    "storage"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "content.js"
+      ],
+      "css": [
+        "styles.css"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "Apple Music 主题",
+    "default_icon": {
+      "16": "logo.png",
+      "48": "logo.png",
+      "128": "logo.png"
+    }
+  },
+  "icons": {
+    "16": "logo.png",
+    "48": "logo.png",
+    "128": "logo.png"
+  }
+}
