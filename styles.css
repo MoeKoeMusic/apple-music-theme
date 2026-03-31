@@ -79,18 +79,6 @@ html.mk-apple-layout-enabled header {
   overflow: visible !important;
 }
 
-html.mk-apple-layout-enabled header::after {
-  content: none;
-  position: absolute;
-  top: 24px;
-  left: 22px;
-  font-size: 11px;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--mk-apple-text-subtle);
-  pointer-events: none;
-}
-
 html.mk-apple-layout-enabled header .navigation {
   display: flex !important;
   align-items: stretch !important;
@@ -108,24 +96,18 @@ html.mk-apple-layout-enabled header nav.navigation {
 }
 
 html.mk-apple-layout-enabled header nav.navigation > .navigation {
-  order: 3;
   display: grid !important;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 10px !important;
-  margin-top: auto !important;
-  padding-top: 14px !important;
-  border-top: 1px solid var(--mk-apple-line);
 }
 
 html.mk-apple-layout-enabled header .search-profile {
-  order: 1;
   flex-direction: column !important;
   align-items: stretch !important;
   gap: 14px !important;
 }
 
 html.mk-apple-layout-enabled header .nav-links {
-  order: 2;
   display: flex !important;
   flex-direction: column !important;
   align-items: stretch !important;
@@ -209,13 +191,6 @@ html.mk-apple-layout-enabled header .profile {
   box-sizing: border-box;
   background: linear-gradient(135deg, rgba(250, 35, 59, 0.14), var(--mk-apple-surface-soft)) !important;
   box-shadow: var(--mk-apple-shadow-soft) !important;
-}
-
-html.mk-apple-layout-enabled header .profile::after {
-  content: none;
-  font-size: 15px;
-  font-weight: 600;
-  color: var(--text-color);
 }
 
 html.mk-apple-layout-enabled header .profile img {
@@ -463,10 +438,7 @@ html.mk-apple-layout-enabled .market-search input {
   color: var(--text-color) !important;
 }
 html.mk-apple-layout-enabled .player-container {
-  left: calc(var(--mk-apple-sidebar-width) + 36px) !important;
-  right: 18px !important;
   bottom: 18px !important;
-  width: auto !important;
   padding: 10px 14px 14px !important;
   border-radius: calc(var(--mk-apple-radius-xl) + 2px) !important;
   border: 1px solid var(--mk-apple-border) !important;
@@ -525,8 +497,8 @@ html.mk-apple-layout-enabled .song-title {
   font-size: 15px !important;
 }
 
-html.mk-apple-layout-enabled .controls .control-btn,
-html.mk-apple-layout-enabled .extra-btn {
+html.mk-apple-layout-enabled .player-container .controls .control-btn,
+html.mk-apple-layout-enabled .player-container .extra-controls .extra-btn {
   width: 40px !important;
   height: 40px !important;
   margin: 0 !important;
@@ -534,9 +506,14 @@ html.mk-apple-layout-enabled .extra-btn {
   border-radius: 999px !important;
   background: var(--mk-apple-chip) !important;
   color: var(--text-color) !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  transform: translateY(0);
+  transition: background-color 0.2s ease, color 0.2s ease, box-shadow 0.22s ease !important;
 }
 
-html.mk-apple-layout-enabled .controls .control-btn:nth-child(2) {
+html.mk-apple-layout-enabled .player-container .controls .control-btn:nth-child(2) {
   width: 54px !important;
   height: 54px !important;
   background: linear-gradient(135deg, #ff566e, #fa233b) !important;
@@ -544,9 +521,17 @@ html.mk-apple-layout-enabled .controls .control-btn:nth-child(2) {
   box-shadow: 0 14px 30px rgba(250, 35, 59, 0.28) !important;
 }
 
-html.mk-apple-layout-enabled .controls .control-btn:hover,
-html.mk-apple-layout-enabled .extra-btn:hover {
-  transform: translateY(-1px) !important;
+html.mk-apple-layout-enabled .player-container .controls .control-btn i,
+html.mk-apple-layout-enabled .player-container .extra-controls .extra-btn i,
+html.mk-apple-layout-enabled .player-container .extra-controls .extra-btn .loop-icon {
+  transition: transform 0.28s cubic-bezier(0.22, 0.61, 0.36, 1) !important;
+  will-change: transform;
+}
+
+html.mk-apple-layout-enabled .player-container .controls .control-btn:hover i,
+html.mk-apple-layout-enabled .player-container .extra-controls .extra-btn:hover i,
+html.mk-apple-layout-enabled .player-container .extra-controls .extra-btn:hover .loop-icon {
+  transform: translateY(-2px) !important;
 }
 
 html.mk-apple-layout-enabled .volume-slider {
@@ -621,10 +606,6 @@ html.mk-apple-layout-enabled .vinyl-cover {
     width: auto !important;
   }
 
-  html.mk-apple-layout-enabled header::after {
-    top: 18px;
-  }
-
   html.mk-apple-layout-enabled header > .navigation,
   html.mk-apple-layout-enabled header nav.navigation {
     flex-direction: row !important;
@@ -635,14 +616,12 @@ html.mk-apple-layout-enabled .vinyl-cover {
   }
 
   html.mk-apple-layout-enabled header .nav-links {
-    order: 1;
     flex: 1 1 100%;
     flex-direction: row !important;
     flex-wrap: wrap !important;
   }
 
   html.mk-apple-layout-enabled header .search-profile {
-    order: 2;
     flex: 1 1 calc(100% - 156px);
     flex-direction: row !important;
     align-items: center !important;
@@ -657,12 +636,7 @@ html.mk-apple-layout-enabled .vinyl-cover {
     min-width: 60px;
   }
 
-  html.mk-apple-layout-enabled header .profile::after {
-    display: none;
-  }
-
   html.mk-apple-layout-enabled header nav.navigation > .navigation {
-    order: 3;
     display: flex !important;
     grid-template-columns: none !important;
     gap: 8px !important;
@@ -683,9 +657,6 @@ html.mk-apple-layout-enabled .vinyl-cover {
     margin: 150px 18px 190px !important;
   }
 
-  html.mk-apple-layout-enabled .player-container {
-    left: 18px !important;
-  }
 }
 
 @media (max-width: 760px) {
@@ -753,11 +724,6 @@ html.mk-apple-layout-enabled .vinyl-cover {
     min-height: 60px !important;
     padding: 8px 10px !important;
     border-radius: 18px !important;
-  }
-
-  html.mk-apple-layout-enabled header .profile::after {
-    content: none;
-    font-size: 14px;
   }
 
   html.mk-apple-layout-enabled header .profile img {
@@ -879,8 +845,6 @@ html.mk-apple-layout-enabled .vinyl-cover {
   }
 
   html.mk-apple-layout-enabled .player-container {
-    left: calc(var(--mk-apple-sidebar-effective) + 32px) !important;
-    right: 18px !important;
     bottom: 14px !important;
     padding: 6px 10px 10px !important;
     border-radius: 28px !important;
@@ -919,13 +883,13 @@ html.mk-apple-layout-enabled .vinyl-cover {
     gap: 6px !important;
   }
 
-  html.mk-apple-layout-enabled .controls .control-btn,
-  html.mk-apple-layout-enabled .extra-btn {
+  html.mk-apple-layout-enabled .player-container .controls .control-btn,
+  html.mk-apple-layout-enabled .player-container .extra-controls .extra-btn {
     width: 34px !important;
     height: 34px !important;
   }
 
-  html.mk-apple-layout-enabled .controls .control-btn:nth-child(2) {
+  html.mk-apple-layout-enabled .player-container .controls .control-btn:nth-child(2) {
     width: 46px !important;
     height: 46px !important;
   }
@@ -983,6 +947,7 @@ html.mk-apple-layout-enabled header .nav-links {
 html.mk-apple-layout-enabled header .profile {
   position: relative !important;
   overflow: hidden !important;
+  justify-content: flex-start !important;
 }
 
 html.mk-apple-layout-enabled header .profile::after {
@@ -999,7 +964,9 @@ html.mk-apple-layout-enabled header .profile .mk-apple-profile-name {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  max-width: 120px;
+  flex: 1 1 auto;
+  max-width: none !important;
+  padding-right: 8px;
   pointer-events: none;
 }
 
@@ -1008,19 +975,6 @@ html.mk-apple-layout-enabled header .profile .mk-apple-profile-link {
   inset: 0;
   z-index: 2;
   border-radius: inherit;
-}
-
-html.mk-apple-layout-enabled header .profile {
-  justify-content: flex-start !important;
-}
-
-html.mk-apple-layout-enabled header .profile .mk-apple-profile-name {
-  flex: 1 1 auto;
-  max-width: none !important;
-  padding-right: 8px;
-}
-
-html.mk-apple-layout-enabled header .profile .mk-apple-profile-link {
   cursor: pointer;
   -webkit-app-region: no-drag;
 }
@@ -1040,6 +994,9 @@ html.mk-apple-layout-enabled .mk-apple-account-links {
   margin-top: 10px !important;
   padding-top: 10px !important;
   border-top: 1px solid var(--mk-apple-line) !important;
+  position: relative !important;
+  z-index: 3 !important;
+  pointer-events: auto !important;
 }
 
 html.mk-apple-layout-enabled .mk-apple-side-link {
@@ -1049,6 +1006,7 @@ html.mk-apple-layout-enabled .mk-apple-side-link {
   width: 100% !important;
   margin: 0 !important;
   padding: 12px 14px !important;
+  padding-right: 12px !important;
   border: none !important;
   border-radius: 18px !important;
   background: transparent !important;
@@ -1061,6 +1019,12 @@ html.mk-apple-layout-enabled .mk-apple-side-link {
   text-align: left !important;
   cursor: pointer !important;
   box-shadow: none !important;
+  box-sizing: border-box !important;
+  max-width: 100% !important;
+  overflow: hidden !important;
+  position: relative !important;
+  z-index: 1 !important;
+  pointer-events: auto !important;
   -webkit-app-region: no-drag;
 }
 
@@ -1070,7 +1034,6 @@ html.mk-apple-layout-enabled .mk-apple-side-link::before {
 }
 
 html.mk-apple-layout-enabled .mk-apple-side-link:hover {
-  transform: translateX(2px);
   background: var(--mk-apple-chip) !important;
 }
 
@@ -1098,6 +1061,7 @@ html.mk-apple-layout-enabled .mk-apple-side-link .new-badge {
   font-size: 10px !important;
   font-style: normal !important;
   line-height: 1.4 !important;
+  flex: 0 0 auto !important;
 }
 
 @media (max-width: 840px) {
@@ -1106,21 +1070,13 @@ html.mk-apple-layout-enabled .mk-apple-side-link .new-badge {
   }
 }
 
-html.mk-apple-layout-enabled .mk-apple-account-links {
-  position: relative !important;
-  z-index: 3 !important;
-  pointer-events: auto !important;
-}
-
-html.mk-apple-layout-enabled .mk-apple-side-link {
-  position: relative !important;
-  z-index: 1 !important;
-  pointer-events: auto !important;
-}
-
 html.mk-apple-layout-enabled .mk-apple-side-link > * {
   pointer-events: none !important;
 }
+html.mk-apple-layout-enabled .mk-apple-side-link.mk-hidden {
+  display: none !important;
+}
+
 
 html.mk-apple-layout-enabled .titlebar {
   position: fixed !important;
@@ -1151,8 +1107,7 @@ html.mk-apple-layout-enabled .mk-apple-account-links {
 }
 
 html.mk-apple-layout-enabled header .search-bar input,
-html.mk-apple-layout-enabled header .nav-links a,
-html.mk-apple-layout-enabled .mk-apple-side-link {
+html.mk-apple-layout-enabled header .nav-links a {
   box-sizing: border-box !important;
   max-width: 100% !important;
 }
@@ -1162,22 +1117,13 @@ html.mk-apple-layout-enabled header .search-bar input {
   min-width: 0 !important;
 }
 
-html.mk-apple-layout-enabled header .nav-links a,
-html.mk-apple-layout-enabled .mk-apple-side-link {
+html.mk-apple-layout-enabled header .nav-links a {
   width: 100% !important;
   overflow: hidden !important;
 }
 
 html.mk-apple-layout-enabled header .nav-links a {
   padding-right: 12px !important;
-}
-
-html.mk-apple-layout-enabled .mk-apple-side-link {
-  padding-right: 12px !important;
-}
-
-html.mk-apple-layout-enabled .mk-apple-side-link .new-badge {
-  flex: 0 0 auto !important;
 }
 
 @media (max-width: 840px) {
@@ -1355,12 +1301,6 @@ html.mk-apple-layout-enabled {
   --mk-apple-player-clearance: 60px;
 }
 
-@media (max-width: 760px) {
-  html.mk-apple-layout-enabled {
-    --mk-apple-player-clearance: 60px;
-  }
-}
-
 html.mk-apple-layout-enabled #app {
   padding-bottom: var(--mk-apple-player-clearance) !important;
   box-sizing: border-box !important;
@@ -1391,15 +1331,6 @@ html.mk-apple-layout-enabled .detail-page:has(.cover-art) .actions {
 html.mk-apple-layout-enabled .detail-page:has(.cover-art) .more-btn-container {
   position: relative !important;
   z-index: 4 !important;
-}
-
-html.mk-apple-layout-enabled .detail-page:has(.cover-art) .dropdown-menu {
-  position: absolute !important;
-  top: calc(100% + 8px) !important;
-  right: 0 !important;
-  left: auto !important;
-  min-width: 132px !important;
-  z-index: 60 !important;
 }
 
 html.mk-apple-layout-enabled .detail-page:has(.cover-art) .cover-art {
@@ -1551,8 +1482,7 @@ html.mk-apple-layout-enabled .detail-page:has(.cover-art) .track-cover {
   border-radius: 4px !important;
 }
 
-html.mk-apple-layout-enabled .detail-page:has(.cover-art) .more-btn,
-html.mk-apple-layout-enabled .detail-page:has(.cover-art) .dropdown-menu {
+html.mk-apple-layout-enabled .detail-page:has(.cover-art) .more-btn {
   pointer-events: auto !important;
 }
 
@@ -1565,7 +1495,6 @@ html.mk-apple-layout-enabled .mk-apple-side-link,
 html.mk-apple-layout-enabled header .profile-menu li a,
 html.mk-apple-layout-enabled .context-menu li,
 html.mk-apple-layout-enabled .submenu li,
-html.mk-apple-layout-enabled .dropdown-menu li,
 html.mk-apple-layout-enabled .batch-actions-menu li {
   transition: transform 0.24s cubic-bezier(0.22, 1, 0.36, 1), background-color 0.24s ease, color 0.24s ease, box-shadow 0.24s ease, opacity 0.24s ease !important;
 }
@@ -1574,7 +1503,6 @@ html.mk-apple-layout-enabled .mk-apple-side-link i,
 html.mk-apple-layout-enabled .mk-apple-side-link .new-badge,
 html.mk-apple-layout-enabled .context-menu li i,
 html.mk-apple-layout-enabled .submenu li i,
-html.mk-apple-layout-enabled .dropdown-menu li i,
 html.mk-apple-layout-enabled .batch-actions-menu li i {
   transition: transform 0.24s cubic-bezier(0.22, 1, 0.36, 1), color 0.24s ease, opacity 0.24s ease !important;
 }
@@ -1582,7 +1510,6 @@ html.mk-apple-layout-enabled .batch-actions-menu li i {
 html.mk-apple-layout-enabled .mk-apple-side-link:hover,
 html.mk-apple-layout-enabled .context-menu li:hover,
 html.mk-apple-layout-enabled .submenu li:hover,
-html.mk-apple-layout-enabled .dropdown-menu li:hover,
 html.mk-apple-layout-enabled .batch-actions-menu li:hover {
   transform: translateX(3px) !important;
 }
@@ -1590,8 +1517,6 @@ html.mk-apple-layout-enabled .batch-actions-menu li:hover {
 html.mk-apple-layout-enabled .mk-apple-side-link:hover i,
 html.mk-apple-layout-enabled .context-menu li:hover i,
 html.mk-apple-layout-enabled .submenu li:hover i,
-html.mk-apple-layout-enabled .dropdown-menu li:hover i,
 html.mk-apple-layout-enabled .batch-actions-menu li:hover i {
   transform: translateX(1px) !important;
 }
-

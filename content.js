@@ -5,510 +5,321 @@
   const ENABLED_CLASS = "mk-apple-layout-enabled";
   const STATIC_MENU_ID = "mk-apple-static-account-links";
   const PROFILE_NAME_CLASS = "mk-apple-profile-name";
-  const PROFILE_LINK_CLASS = "mk-apple-profile-link";
-  const PROFILE_BOOTSTRAP_MARK = "data-mk-profile-bootstrap";
-  const FLOATING_MENU_PORTAL_MARK = "data-mk-floating-portal";
-  const CLICK_GUARD_MARK = "data-mk-click-guard";
-  const DEFAULT_CONFIG = Object.freeze({
-    enabled: true
+  const DEFAULT_LOGIN_LABEL = "\u767b\u5f55";
+  const DEFAULT_CONFIG = Object.freeze({ enabled: true });
+
+  const ACTION_ICON_CLASS = Object.freeze({
+    settings: "fa-cog",
+    update: "fa-github",
+    about: "fa-info-circle",
+    login: "fa-sign-in-alt",
+    logout: "fa-sign-out-alt"
   });
 
+  const STATIC_ACCOUNT_MENU_HTML = `
+    <button type="button" class="mk-apple-side-link" data-action="settings">
+      <i class="fas fa-cog"></i>
+      <span>&#35774;&#32622;</span>
+    </button>
+    <button type="button" class="mk-apple-side-link" data-action="update">
+      <i class="fab fa-github"></i>
+      <span>&#26356;&#26032;</span>
+    </button>
+    <button type="button" class="mk-apple-side-link" data-action="about">
+      <i class="fas fa-info-circle"></i>
+      <span>&#20851;&#20110;</span>
+    </button>
+    <button type="button" class="mk-apple-side-link mk-link-login" data-action="login">
+      <i class="fas fa-sign-in-alt"></i>
+      <span>&#30331;&#24405;</span>
+    </button>
+    <button type="button" class="mk-apple-side-link mk-link-logout" data-action="logout">
+      <i class="fas fa-sign-out-alt"></i>
+      <span>&#36864;&#20986;</span>
+    </button>
+  `;
+
   let currentConfig = { ...DEFAULT_CONFIG };
-  let scheduledFrame = 0;
-  let bootstrapRetryTimer = 0;
-  let bootstrapRetryCount = 0;
-  let observerHoldCount = 0;
-  let headerObserver = null;
-  let floatingUiObserver = null;
-  let floatingUiFrame = 0;
-  let initialConfigPromise = null;
+  let floatingSyncFrame = 0;
+  let applySyncFrame = 0;
 
-  function normalizeConfig(config) {
-    const next = config && typeof config === "object" ? config : {};
-    return {
-      enabled: next.enabled !== false
-    };
-  }
+  const normalizeConfig = (config = {}) => ({
+    enabled: config.enabled !== false
+  });
 
-  function isExcludedRoute() {
-    const hash = window.location.hash || "";
-    return /^#\/?(lyrics|video)(?:[/?]|$)/i.test(hash);
-  }
+  const isExcludedRoute = () => /^#\/?(lyrics|video)(?:[/?]|$)/i.test(window.location.hash || "");
 
-
-  function applyRootThemeState(config) {
-    const root = document.documentElement;
-    if (!root) return false;
-
-    const shouldEnable = Boolean(config.enabled) && !isExcludedRoute();
-    if (!shouldEnable) {
-      root.classList.remove(ENABLED_CLASS);
-      return false;
-    }
-
-    root.classList.add(ENABLED_CLASS);
-    return true;
-  }
-
-  function getCurrentPath() {
-    const hash = window.location.hash || "#/";
-    const cleaned = hash.replace(/^#/, "");
-    return cleaned.split("?")[0] || "/";
-  }
-
-  function normalizePath(path) {
+  const normalizePath = (path) => {
     if (!path) return "/";
     const withSlash = path.startsWith("/") ? path : `/${path}`;
     return withSlash.replace(/\/+$/, "") || "/";
-  }
+  };
 
-  function navigateTo(path) {
-    const targetPath = normalizePath(path);
-    const targetHash = `#${targetPath}`;
-    if (window.location.hash !== targetHash) {
-      window.location.hash = targetHash;
-    }
-  }
+  const getCurrentPath = () => {
+    const hash = window.location.hash || "#/";
+    return normalizePath(hash.replace(/^#/, "").split("?")[0] || "/");
+  };
 
-  function readPersistedAuth() {
+  const getRoutePathFromHref = (href) => normalizePath(String(href || "").replace(/^#/, ""));
+
+  const isPathActive = (targetPath, currentPath) => {
+    if (targetPath === "/") return currentPath === "/";
+    return currentPath === targetPath || currentPath.startsWith(`${targetPath}/`);
+  };
+
+  const readAuthStore = () => {
+    const raw = localStorage.getItem("MoeData");
+    if (!raw) return null;
+
     try {
-      const raw = localStorage.getItem("MoeData");
-      if (!raw) return {};
-      const parsed = JSON.parse(raw);
-      return parsed && typeof parsed === "object" ? parsed : {};
-    } catch (_error) {
-      return {};
+      return JSON.parse(raw);
+    } catch {
+      return null;
     }
-  }
+  };
 
-  function getAuthState() {
-    const store = readPersistedAuth();
-    const userInfo = store && typeof store.UserInfo === "object" ? store.UserInfo : null;
-    const nickname = typeof userInfo?.nickname === "string" ? userInfo.nickname.trim() : "";
-    return {
-      nickname,
-      isAuthenticated: Boolean(userInfo && nickname)
-    };
-  }
+  const getProfileLabel = () => {
+    const store = readAuthStore();
+    const nickname = typeof store?.UserInfo?.nickname === "string" ? store.UserInfo.nickname.trim() : "";
+    return nickname || DEFAULT_LOGIN_LABEL;
+  };
 
-  function getLibraryLabel(navLinks) {
-    const libraryLink = navLinks?.querySelector('a[href="#/library"]');
-    const label = libraryLink?.textContent?.trim();
-    return label || "Library";
-  }
+  const isAuthenticated = () => Boolean(readAuthStore()?.UserInfo);
 
-  function dispatchClick(target) {
-    if (!target) return;
+  const dispatchClick = (target) => {
+    if (!(target instanceof Element)) return;
     target.dispatchEvent(new MouseEvent("click", {
       bubbles: true,
       cancelable: true,
       view: window
     }));
-  }
+  };
 
-  function requestBootstrapRetry() {
-    if (bootstrapRetryTimer || bootstrapRetryCount >= 12) return;
-    bootstrapRetryCount += 1;
-    bootstrapRetryTimer = window.setTimeout(() => {
-      bootstrapRetryTimer = 0;
-      scheduleApply();
-    }, 0);
-  }
+  const waitFrame = () => new Promise((resolve) => {
+    window.requestAnimationFrame(() => resolve());
+  });
 
-  function withObserverHold(fn) {
-    observerHoldCount += 1;
-    try {
-      return fn();
-    } finally {
-      queueMicrotask(() => {
-        observerHoldCount = Math.max(0, observerHoldCount - 1);
-      });
-    }
-  }
+  const syncTopNavActive = (enabled) => {
+    const links = [...document.querySelectorAll("header .nav-links a[href^='#/']")];
+    if (!links.length) return;
 
-  function isInjectedElement(node) {
-    if (!(node instanceof Element)) return false;
-    if (node.id === STATIC_MENU_ID) return true;
-    if (node.classList.contains(PROFILE_NAME_CLASS) || node.classList.contains(PROFILE_LINK_CLASS)) return true;
-    if (node.closest(`#${STATIC_MENU_ID}`)) return true;
-    return false;
-  }
-
-  function hasRelevantMutation(mutations) {
-    return mutations.some((mutation) => {
-      const elements = [...mutation.addedNodes, ...mutation.removedNodes].filter((node) => node instanceof Element);
-
-      if (!elements.length) {
-        return mutation.target instanceof Element && Boolean(mutation.target.closest("header"));
-      }
-
-      return elements.some((node) => {
-        if (isInjectedElement(node)) return false;
-        if (node.matches("header, nav, .navigation, .search-profile, .nav-links, .profile, .profile-menu")) {
-          return true;
-        }
-        return Boolean(node.querySelector("header, .navigation, .search-profile, .nav-links, .profile, .profile-menu"));
-      });
-    });
-  }
-
-  function ensureHeaderObserver() {
-    if (headerObserver) return;
-
-    headerObserver = new MutationObserver((mutations) => {
-      if (!currentConfig.enabled) return;
-      if (observerHoldCount > 0) return;
-      if (!hasRelevantMutation(mutations)) return;
-      scheduleApply();
-    });
-
-    headerObserver.observe(document.body || document.documentElement, {
-      childList: true,
-      subtree: true
-    });
-  }
-
-  function hasFloatingUiMutation(mutations) {
-    return mutations.some((mutation) => {
-      const elements = [...mutation.addedNodes, ...mutation.removedNodes].filter((node) => node instanceof Element);
-
-      if (!elements.length) {
-        return mutation.target instanceof Element && Boolean(
-          mutation.target.closest(".context-menu, .submenu, .more-btn, .dropdown-menu, .detail-page")
-        );
-      }
-
-      return elements.some((node) => {
-        if (node.matches(".context-menu, .submenu, .more-btn, .dropdown-menu, .detail-page")) {
-          return true;
-        }
-        return Boolean(node.querySelector(".context-menu, .submenu, .more-btn, .dropdown-menu, .detail-page"));
-      });
-    });
-  }
-
-  function ensureFloatingUiObserver() {
-    if (floatingUiObserver) return;
-
-    floatingUiObserver = new MutationObserver((mutations) => {
-      if (!currentConfig.enabled) return;
-      if (observerHoldCount > 0) return;
-      if (!hasFloatingUiMutation(mutations)) return;
-      scheduleFloatingUiSync();
-    });
-
-    floatingUiObserver.observe(document.body || document.documentElement, {
-      childList: true,
-      subtree: true
-    });
-  }
-
-  function moveFloatingContextMenusToBody() {
-    document.querySelectorAll(".context-menu").forEach((menu) => {
-      if (!(menu instanceof HTMLElement)) return;
-      if (menu.parentElement === document.body && menu.getAttribute(FLOATING_MENU_PORTAL_MARK) === "true") return;
-      document.body.appendChild(menu);
-      menu.setAttribute(FLOATING_MENU_PORTAL_MARK, "true");
-    });
-  }
-
-  function bindDetailMenuClickGuards() {
-    document.querySelectorAll(".detail-page .more-btn, .detail-page .dropdown-menu").forEach((node) => {
-      if (!(node instanceof HTMLElement)) return;
-      if (node.getAttribute(CLICK_GUARD_MARK) === "true") return;
-      node.setAttribute(CLICK_GUARD_MARK, "true");
-      node.addEventListener("click", (event) => {
-        event.stopPropagation();
-      }, true);
-    });
-  }
-
-  function syncFloatingUi(shouldEnable) {
-    if (!shouldEnable) return;
-    moveFloatingContextMenusToBody();
-    bindDetailMenuClickGuards();
-  }
-
-  function scheduleFloatingUiSync() {
-    if (floatingUiFrame) return;
-    floatingUiFrame = window.requestAnimationFrame(() => {
-      floatingUiFrame = 0;
-      syncFloatingUi(Boolean(currentConfig.enabled) && !isExcludedRoute());
-    });
-  }
-
-  function ensureProfileMenuMounted(profile) {
-    const existingMenu = document.querySelector("header .profile-menu");
-    if (existingMenu) {
-      bootstrapRetryCount = 0;
-      return existingMenu;
-    }
-    if (!profile || profile.hasAttribute(PROFILE_BOOTSTRAP_MARK)) return null;
-
-    profile.setAttribute(PROFILE_BOOTSTRAP_MARK, "true");
-    dispatchClick(profile);
-    queueMicrotask(() => profile.removeAttribute(PROFILE_BOOTSTRAP_MARK));
-
-    const mountedMenu = document.querySelector("header .profile-menu");
-    if (mountedMenu) {
-      bootstrapRetryCount = 0;
-      return mountedMenu;
+    if (!enabled) {
+      links.forEach((link) => link.classList.remove("active"));
+      return;
     }
 
-    requestBootstrapRetry();
-    return null;
-  }
+    const currentPath = getCurrentPath();
+    links.forEach((link) => {
+      const targetPath = getRoutePathFromHref(link.getAttribute("href") || "");
+      link.classList.toggle("active", isPathActive(targetPath, currentPath));
+    });
+  };
 
-  function closeProfileMenu(profile) {
-    if (!profile || !document.querySelector("header .profile-menu")) return;
-    profile.setAttribute(PROFILE_BOOTSTRAP_MARK, "true");
-    dispatchClick(profile);
-    queueMicrotask(() => profile.removeAttribute(PROFILE_BOOTSTRAP_MARK));
-  }
+  const findHeaderMenuAction = (iconClass) => {
+    const items = [...document.querySelectorAll("header .profile-menu li a")];
+    return items.find((item) => item.querySelector(`.${iconClass}`)) || null;
+  };
 
-  function removeInjectedSidebarUi() {
-    const menu = document.getElementById(STATIC_MENU_ID);
-    if (menu) menu.remove();
-
-    document.querySelectorAll(`header .${PROFILE_NAME_CLASS}`).forEach((node) => node.remove());
-    document.querySelectorAll(`header .${PROFILE_LINK_CLASS}`).forEach((node) => node.remove());
+  const ensureHeaderMenuReady = async () => {
+    if (findHeaderMenuAction(ACTION_ICON_CLASS.settings)) return true;
 
     const profile = document.querySelector("header .profile");
-    if (profile) {
-      profile.removeAttribute("data-mk-user-label");
+    if (!(profile instanceof Element)) return false;
+
+    dispatchClick(profile);
+    for (let i = 0; i < 6; i++) {
+      await waitFrame();
+      if (findHeaderMenuAction(ACTION_ICON_CLASS.settings)) return true;
+    }
+
+    return false;
+  };
+
+  const invokeHeaderAction = async (action) => {
+    const iconClass = ACTION_ICON_CLASS[action];
+    if (!iconClass) return false;
+
+    let target = findHeaderMenuAction(iconClass);
+    if (!target) {
+      const ready = await ensureHeaderMenuReady();
+      if (!ready) return false;
+      target = findHeaderMenuAction(iconClass);
+    }
+
+    if (!target) return false;
+    dispatchClick(target);
+    return true;
+  };
+
+  const syncProfileLabel = (enabled) => {
+    const profile = document.querySelector("header .profile");
+    if (!(profile instanceof Element)) return;
+
+    let nameNode = profile.querySelector(`.${PROFILE_NAME_CLASS}`);
+    if (!enabled) {
+      if (nameNode) nameNode.remove();
       profile.removeAttribute("title");
-      closeProfileMenu(profile);
-    }
-  }
-
-  function isRouteLink(sourceNode) {
-    const href = sourceNode?.getAttribute("href") || "";
-    return href.startsWith("#/");
-  }
-
-  function getRoutePathFromHref(href) {
-    return normalizePath(String(href || "").replace(/^#/, ""));
-  }
-
-  function isActiveRouteLink(href, currentPath) {
-    const targetPath = getRoutePathFromHref(href);
-    if (targetPath === "/") return currentPath === "/";
-    return currentPath === targetPath || currentPath.startsWith(`${targetPath}/`);
-  }
-
-  function cloneMenuContent(sourceNode, targetNode) {
-    for (const childNode of sourceNode.childNodes) {
-      targetNode.appendChild(childNode.cloneNode(true));
-    }
-  }
-
-  function buildSidebarItem(sourceNode, currentPath, itemIndex, profile) {
-    if (!(sourceNode instanceof Element)) return null;
-
-    const href = sourceNode.getAttribute("href") || "";
-    const routeLike = isRouteLink(sourceNode);
-    const element = document.createElement(routeLike ? "a" : "button");
-    element.className = "mk-apple-side-link";
-    cloneMenuContent(sourceNode, element);
-
-    if (routeLike) {
-      element.href = href;
-      if (isActiveRouteLink(href, currentPath)) {
-        element.classList.add("active");
-      }
-      element.addEventListener("click", (event) => {
-        event.stopPropagation();
-      });
-      return element;
+      return;
     }
 
-    element.type = "button";
-    element.addEventListener("click", (event) => {
-      event.preventDefault();
-      event.stopPropagation();
+    if (!nameNode) {
+      nameNode = document.createElement("span");
+      nameNode.className = PROFILE_NAME_CLASS;
+      profile.appendChild(nameNode);
+    }
 
-      const liveMenu = ensureProfileMenuMounted(profile);
-      const liveItems = liveMenu ? [...liveMenu.querySelectorAll("li > a")] : [];
-      const liveNode = liveItems[itemIndex] || sourceNode;
-      dispatchClick(liveNode);
-      window.requestAnimationFrame(scheduleApply);
-    });
-    return element;
-  }
+    const label = getProfileLabel();
+    if (nameNode.textContent !== label) {
+      nameNode.textContent = label;
+    }
+    profile.title = label;
+  };
 
-  function getMenuSignature(sourceItems, currentPath) {
-    const itemSignature = sourceItems.map((item) => {
-      const badge = item.querySelector(".new-badge") ? "1" : "0";
-      return [item.getAttribute("href") || "", item.textContent?.trim() || "", badge].join("|");
-    }).join("||");
-    return `${currentPath}::${itemSignature}`;
-  }
+  const updateStaticAccountMenu = (menu) => {
+    const authenticated = isAuthenticated();
+    const currentPath = getCurrentPath();
 
-  function syncStaticSidebarMenu(navLinks, sourceMenu, profile) {
-    const sourceItems = [...sourceMenu.querySelectorAll("li > a")].filter((node) => node instanceof Element);
-    if (!sourceItems.length) return;
+    const loginButton = menu.querySelector(".mk-link-login");
+    const logoutButton = menu.querySelector(".mk-link-logout");
+    const settingsButton = menu.querySelector('[data-action="settings"]');
+
+    loginButton.classList.toggle("mk-hidden", authenticated);
+    logoutButton.classList.toggle("mk-hidden", !authenticated);
+
+    settingsButton.classList.toggle("active", isPathActive("/settings", currentPath));
+    loginButton.classList.toggle("active", !authenticated && isPathActive("/login", currentPath));
+  };
+
+  const ensureStaticAccountMenu = () => {
+    const navLinks = document.querySelector("header .nav-links");
+    if (!navLinks) return;
 
     let menu = document.getElementById(STATIC_MENU_ID);
     if (!menu) {
       menu = document.createElement("div");
       menu.id = STATIC_MENU_ID;
       menu.className = "mk-apple-account-links";
+      menu.innerHTML = STATIC_ACCOUNT_MENU_HTML;
+
+      menu.addEventListener("click", async (event) => {
+        const target = event.target;
+        if (!(target instanceof Element)) return;
+
+        const actionButton = target.closest("[data-action]");
+        if (!actionButton) return;
+
+        event.preventDefault();
+        event.stopPropagation();
+
+        const action = actionButton.getAttribute("data-action");
+        await invokeHeaderAction(action);
+        scheduleApply();
+      });
+    }
+
+    if (menu.parentElement !== navLinks.parentElement || menu.previousElementSibling !== navLinks) {
       navLinks.insertAdjacentElement("afterend", menu);
     }
 
-    const currentPath = getCurrentPath();
-    const signature = getMenuSignature(sourceItems, currentPath);
-    if (menu.dataset.signature === signature) return;
+    updateStaticAccountMenu(menu);
+  };
 
-    const nextNodes = sourceItems
-      .map((item, index) => buildSidebarItem(item, currentPath, index, profile))
-      .filter((node) => node instanceof Node);
+  const removeStaticAccountMenu = () => {
+    const menu = document.getElementById(STATIC_MENU_ID);
+    if (menu) menu.remove();
+  };
 
-    menu.replaceChildren(...nextNodes);
-    menu.dataset.signature = signature;
-  }
+  const syncFloatingContextMenus = () => {
+    if (!(currentConfig.enabled && !isExcludedRoute())) return;
 
-  function syncProfileCard(profile, navLinks) {
-    const auth = getAuthState();
-    const userLabel = auth.nickname || getLibraryLabel(navLinks);
+    if (!document.querySelector(".context-menu")) return;
 
-    profile.dataset.mkUserLabel = userLabel;
-    profile.title = userLabel;
-
-    let nameNode = profile.querySelector(`.${PROFILE_NAME_CLASS}`);
-    if (!nameNode) {
-      nameNode = document.createElement("span");
-      nameNode.className = PROFILE_NAME_CLASS;
-      profile.appendChild(nameNode);
-    }
-    if (nameNode.textContent !== userLabel) {
-      nameNode.textContent = userLabel;
-    }
-
-    let hitArea = profile.querySelector(`.${PROFILE_LINK_CLASS}`);
-    if (!hitArea) {
-      hitArea = document.createElement("a");
-      hitArea.className = PROFILE_LINK_CLASS;
-      hitArea.href = "#/library";
-      hitArea.addEventListener("click", (event) => {
-        event.preventDefault();
-        event.stopPropagation();
-        navigateTo("/library");
-      });
-      profile.appendChild(hitArea);
-    }
-    hitArea.setAttribute("aria-label", userLabel);
-  }
-
-
-  function syncSidebarEnhancements(shouldEnable) {
-    const header = document.querySelector("header");
-    const navLinks = header?.querySelector(".nav-links");
-    const profile = header?.querySelector(".profile");
-
-    if (!shouldEnable) {
-      bootstrapRetryCount = 0;
-      removeInjectedSidebarUi();
-      return;
-    }
-
-    if (!header || !navLinks || !profile) {
-      requestBootstrapRetry();
-      return;
-    }
-
-    const sourceMenu = ensureProfileMenuMounted(profile);
-    if (!sourceMenu) return;
-
-    bootstrapRetryCount = 0;
-    syncProfileCard(profile, navLinks);
-    syncStaticSidebarMenu(navLinks, sourceMenu, profile);
-  }
-
-  function applyTheme(config) {
-    const shouldEnable = applyRootThemeState(config);
-
-    if (!shouldEnable) {
-      withObserverHold(() => {
-        syncSidebarEnhancements(false);
-      });
-      return;
-    }
-
-    if (!document.body) return;
-
-    withObserverHold(() => {
-      syncSidebarEnhancements(true);
-      syncFloatingUi(true);
+    document.querySelectorAll(".context-menu").forEach((menu) => {
+      if (!(menu instanceof HTMLElement)) return;
+      if (menu.parentElement !== document.body) {
+        document.body.appendChild(menu);
+      }
+      menu.style.position = "fixed";
+      menu.style.zIndex = "60";
     });
-  }
+  };
 
-  function scheduleApply() {
-    if (scheduledFrame) return;
-    scheduledFrame = window.requestAnimationFrame(() => {
-      scheduledFrame = 0;
-      applyTheme(currentConfig);
+  const scheduleFloatingMenuSync = () => {
+    if (floatingSyncFrame) return;
+    floatingSyncFrame = window.requestAnimationFrame(() => {
+      floatingSyncFrame = 0;
+      syncFloatingContextMenus();
     });
-  }
+  };
 
-  function readConfig() {
-    return new Promise((resolve) => {
-      chrome.storage.local.get(STORAGE_KEY, (result) => {
-        const hasStoredConfig = Object.prototype.hasOwnProperty.call(result || {}, STORAGE_KEY);
-        const normalized = normalizeConfig((result || {})[STORAGE_KEY] || DEFAULT_CONFIG);
+  const applyTheme = () => {
+    const enabled = currentConfig.enabled && !isExcludedRoute();
+    document.documentElement.classList.toggle(ENABLED_CLASS, enabled);
 
-        if (!hasStoredConfig) {
-          chrome.storage.local.set({ [STORAGE_KEY]: normalized }, () => resolve(normalized));
-          return;
-        }
+    if (enabled) {
+      ensureStaticAccountMenu();
+      syncProfileLabel(true);
+      syncTopNavActive(true);
+      scheduleFloatingMenuSync();
+    } else {
+      removeStaticAccountMenu();
+      syncProfileLabel(false);
+      syncTopNavActive(false);
+    }
+  };
 
-        resolve(normalized);
-      });
+  const scheduleApply = () => {
+    if (applySyncFrame) return;
+    applySyncFrame = window.requestAnimationFrame(() => {
+      applySyncFrame = 0;
+      applyTheme();
+      window.requestAnimationFrame(applyTheme);
     });
-  }
+  };
 
-  function primeTheme() {
-    if (initialConfigPromise) return initialConfigPromise;
+  const readConfig = () => new Promise((resolve) => {
+    chrome.storage.local.get(STORAGE_KEY, (result = {}) => {
+      const hasStored = Object.prototype.hasOwnProperty.call(result, STORAGE_KEY);
+      const normalized = normalizeConfig(result[STORAGE_KEY] || DEFAULT_CONFIG);
+      if (!hasStored) {
+        chrome.storage.local.set({ [STORAGE_KEY]: normalized });
+      }
+      resolve(normalized);
+    });
+  });
 
-    initialConfigPromise = readConfig()
-      .then((config) => {
-        currentConfig = config;
-        applyRootThemeState(config);
-        return config;
-      })
-      .catch(() => {
-        applyRootThemeState(currentConfig);
-        return currentConfig;
-      });
-
-    return initialConfigPromise;
-  }
-
-  async function init() {
-    currentConfig = await primeTheme();
-    ensureHeaderObserver();
-    ensureFloatingUiObserver();
-    applyTheme(currentConfig);
-  }
+  const init = async () => {
+    currentConfig = await readConfig();
+    scheduleApply();
+  };
 
   chrome.storage.onChanged.addListener((changes, areaName) => {
     if (areaName !== "local" || !changes[STORAGE_KEY]) return;
     currentConfig = normalizeConfig(changes[STORAGE_KEY].newValue || DEFAULT_CONFIG);
-    applyTheme(currentConfig);
+    scheduleApply();
   });
 
-  window.addEventListener("hashchange", scheduleApply, { passive: true });
+  window.addEventListener("hashchange", () => {
+    scheduleApply();
+    window.setTimeout(scheduleApply, 0);
+  }, { passive: true });
+
   window.addEventListener("focus", scheduleApply, { passive: true });
-  document.addEventListener("visibilitychange", () => {
-    if (!document.hidden) scheduleApply();
-  });
 
-  primeTheme();
+  document.addEventListener("contextmenu", scheduleFloatingMenuSync, true);
+  document.addEventListener("click", (event) => {
+    scheduleFloatingMenuSync();
+    const target = event.target;
+    if (!(target instanceof Element)) return;
+    if (!target.closest("header .nav-links a, .profile-menu a, .mk-apple-side-link")) return;
+    window.setTimeout(scheduleApply, 0);
+  }, true);
+
+  document.documentElement.classList.toggle(ENABLED_CLASS, DEFAULT_CONFIG.enabled && !isExcludedRoute());
 
   if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", init, { once: true });
-  } else {
-    init();
+    document.addEventListener("DOMContentLoaded", scheduleApply, { once: true });
   }
-})();
 
+  init();
+})();
