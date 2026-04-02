@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "Apple Music 主题",
   "plugin_id": "apple-music-theme",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "minversion": "1.6.1",
   "moekoe": true,
   "author": {
