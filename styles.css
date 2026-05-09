@@ -189,6 +189,7 @@ html.mk-apple-layout-enabled main>.container>.recommendations .radio-subtitle{fo
 }
 html.mk-apple-layout-enabled .library-page>.favorite-section,html.mk-apple-layout-enabled .library-page>.profile-section+.section-title{display:none!important}
 html.mk-apple-layout-enabled .detail-page,html.mk-apple-layout-enabled .discover-page,html.mk-apple-layout-enabled .library-page,html.mk-apple-layout-enabled .search-results{padding:0!important}
+html.mk-apple-layout-enabled .discover-floating-arona{display:none!important}
 html.mk-apple-layout-enabled{--mk-apple-player-clearance:60px}
 html.mk-apple-layout-enabled #app{padding-bottom:var(--mk-apple-player-clearance)!important;box-sizing:border-box!important}
 html.mk-apple-layout-enabled main{margin-bottom:18px!important}
@@ -234,3 +235,5 @@ html.mk-apple-layout-enabled .ranking-container .song-content{display:flex!impor
 html.mk-apple-layout-enabled .ranking-container .song-main{flex:2 1 0!important;min-width:0!important;margin-right:16px!important}
 html.mk-apple-layout-enabled .ranking-container .song-meta{flex:1 1 0!important;display:flex!important;align-items:center!important;justify-content:flex-end!important;min-width:0!important}
 html.mk-apple-layout-enabled .ranking-container .album{margin-right:16px!important;text-align:right!important}
+html.mk-apple-layout-enabled .discover-new-song-content .song-list{display:block!important;grid-template-columns:none!important;gap:0!important;margin-top:0!important}
+html.mk-apple-layout-enabled .discover-new-song-content .result-item{width:100%!important;box-sizing:border-box!important}
