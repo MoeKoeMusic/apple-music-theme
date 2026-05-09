@@ -24,7 +24,7 @@ html.mk-apple-layout-enabled header .nav-arrow{width:100%!important;aspect-ratio
 html.mk-apple-layout-enabled header .nav-arrow i{font-size:15px!important;color:inherit!important}
 html.mk-apple-layout-enabled header .nav-arrow:hover:not(:disabled){background:rgba(250,35,59,.12)!important;color:var(--color-primary)!important}
 html.mk-apple-layout-enabled header .nav-arrow:disabled{opacity:.45}
-html.mk-apple-layout-enabled main{position:relative!important;min-height:calc(100vh - 36px)!important;max-width:none!important;margin:18px 18px 190px calc(var(--mk-apple-sidebar-width) + 36px)!important;padding:28px!important;border-radius:calc(var(--mk-apple-radius-xl) + 6px)!important;background:var(--mk-apple-surface)!important;border:1px solid var(--mk-apple-border)!important;box-shadow:var(--mk-apple-shadow)!important;backdrop-filter:blur(calc(var(--mk-apple-blur) * 0.8)) saturate(1.2)!important;-webkit-backdrop-filter:blur(calc(var(--mk-apple-blur) * 0.8)) saturate(1.2)!important;overflow:visible!important}
+html.mk-apple-layout-enabled main{position:relative!important;min-height:calc(100vh - 36px)!important;max-width:none!important;margin:18px 18px 190px calc(var(--mk-apple-sidebar-width) + 36px)!important;padding:28px!important;border-radius:calc(var(--mk-apple-radius-xl) + 6px)!important;border:1px solid var(--mk-apple-border)!important;box-shadow:var(--mk-apple-shadow)!important;backdrop-filter:blur(calc(var(--mk-apple-blur) * 0.8)) saturate(1.2)!important;-webkit-backdrop-filter:blur(calc(var(--mk-apple-blur) * 0.8)) saturate(1.2)!important;overflow:visible!important}
 html.mk-apple-layout-enabled main>*{position:relative;z-index:1}
 html.mk-apple-layout-enabled .container{max-width:none!important;margin:0!important;padding:0!important}
 html.mk-apple-layout-enabled .header h1,html.mk-apple-layout-enabled .section-title,html.mk-apple-layout-enabled .settings-content h2,html.mk-apple-layout-enabled .track-list-title{color:var(--text-color)!important;letter-spacing:-.03em!important}
@@ -235,5 +235,5 @@ html.mk-apple-layout-enabled .ranking-container .song-content{display:flex!impor
 html.mk-apple-layout-enabled .ranking-container .song-main{flex:2 1 0!important;min-width:0!important;margin-right:16px!important}
 html.mk-apple-layout-enabled .ranking-container .song-meta{flex:1 1 0!important;display:flex!important;align-items:center!important;justify-content:flex-end!important;min-width:0!important}
 html.mk-apple-layout-enabled .ranking-container .album{margin-right:16px!important;text-align:right!important}
-html.mk-apple-layout-enabled .discover-new-song-content .song-list{display:block!important;grid-template-columns:none!important;gap:0!important;margin-top:0!important}
+html.mk-apple-layout-enabled .discover-new-song-content .song-list, html.mk-apple-layout-enabled .song-list{display:block!important;grid-template-columns:none!important;gap:0!important;margin-top:0!important}
 html.mk-apple-layout-enabled .discover-new-song-content .result-item{width:100%!important;box-sizing:border-box!important}
