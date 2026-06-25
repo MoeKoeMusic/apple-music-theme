@@ -3,6 +3,8 @@
 
   const STORAGE_KEY = "appleMusicLayoutTheme";
   const ENABLED_CLASS = "mk-apple-layout-enabled";
+  const TOP_MODE_CLASS = "mk-apple-layout-top";
+  const SIDE_MODE_CLASS = "mk-apple-layout-side";
   const STATIC_MENU_ID = "mk-apple-static-account-links";
   const PROFILE_NAME_CLASS = "mk-apple-profile-name";
   const DEFAULT_LOGIN_LABEL = "\u767b\u5f55";
@@ -67,6 +69,17 @@
     return currentPath === targetPath || currentPath.startsWith(`${targetPath}/`);
   };
 
+  const getNavigationMode = () => (
+    document.querySelector(".side-navigation") ? "side" : "top"
+  );
+
+  const syncLayoutMode = (enabled) => {
+    const mode = getNavigationMode();
+    document.documentElement.classList.toggle(TOP_MODE_CLASS, enabled && mode === "top");
+    document.documentElement.classList.toggle(SIDE_MODE_CLASS, enabled && mode === "side");
+    return mode;
+  };
+
   const readAuthStore = () => {
     const raw = localStorage.getItem("MoeData");
     if (!raw) return null;
@@ -101,6 +114,22 @@
 
   const syncTopNavActive = (enabled) => {
     const links = [...document.querySelectorAll("header .nav-links a[href^='#/']")];
+    if (!links.length) return;
+
+    if (!enabled) {
+      links.forEach((link) => link.classList.remove("active"));
+      return;
+    }
+
+    const currentPath = getCurrentPath();
+    links.forEach((link) => {
+      const targetPath = getRoutePathFromHref(link.getAttribute("href") || "");
+      link.classList.toggle("active", isPathActive(targetPath, currentPath));
+    });
+  };
+
+  const syncSideNavActive = (enabled) => {
+    const links = [...document.querySelectorAll(".side-navigation .side-link[href^='#/']:not(.side-playlist-link)")];
     if (!links.length) return;
 
     if (!enabled) {
@@ -255,16 +284,26 @@
   const applyTheme = () => {
     const enabled = currentConfig.enabled && !isExcludedRoute();
     document.documentElement.classList.toggle(ENABLED_CLASS, enabled);
+    const mode = syncLayoutMode(enabled);
 
     if (enabled) {
-      ensureStaticAccountMenu();
-      syncProfileLabel(true);
-      syncTopNavActive(true);
+      if (mode === "top") {
+        ensureStaticAccountMenu();
+        syncProfileLabel(true);
+        syncTopNavActive(true);
+        syncSideNavActive(false);
+      } else {
+        removeStaticAccountMenu();
+        syncProfileLabel(false);
+        syncTopNavActive(false);
+        syncSideNavActive(true);
+      }
       scheduleFloatingMenuSync();
     } else {
       removeStaticAccountMenu();
       syncProfileLabel(false);
       syncTopNavActive(false);
+      syncSideNavActive(false);
     }
   };
 
@@ -275,6 +314,13 @@
       applyTheme();
       window.requestAnimationFrame(applyTheme);
     });
+  };
+
+  const scheduleStartupApply = () => {
+    scheduleApply();
+    window.setTimeout(scheduleApply, 120);
+    window.setTimeout(scheduleApply, 500);
+    window.setTimeout(scheduleApply, 1200);
   };
 
   const readConfig = () => new Promise((resolve) => {
@@ -290,7 +336,7 @@
 
   const init = async () => {
     currentConfig = await readConfig();
-    scheduleApply();
+    scheduleStartupApply();
   };
 
   chrome.storage.onChanged.addListener((changes, areaName) => {
@@ -305,20 +351,22 @@
   }, { passive: true });
 
   window.addEventListener("focus", scheduleApply, { passive: true });
+  window.addEventListener("settings-change", scheduleApply, { passive: true });
+  window.addEventListener("sidebar-collapse-change", scheduleApply, { passive: true });
 
   document.addEventListener("contextmenu", scheduleFloatingMenuSync, true);
   document.addEventListener("click", (event) => {
     scheduleFloatingMenuSync();
     const target = event.target;
     if (!(target instanceof Element)) return;
-    if (!target.closest("header .nav-links a, .profile-menu a, .mk-apple-side-link")) return;
+    if (!target.closest("header .nav-links a, .profile-menu a, .mk-apple-side-link, .side-navigation a, .side-profile-menu a, .side-profile-menu-button, .side-action-button")) return;
     window.setTimeout(scheduleApply, 0);
   }, true);
 
   document.documentElement.classList.toggle(ENABLED_CLASS, DEFAULT_CONFIG.enabled && !isExcludedRoute());
 
   if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", scheduleApply, { once: true });
+    document.addEventListener("DOMContentLoaded", scheduleStartupApply, { once: true });
   }
 
   init();

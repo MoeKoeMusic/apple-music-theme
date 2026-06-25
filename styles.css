@@ -15,7 +15,7 @@ html.mk-apple-layout-enabled header .nav-links a.active{color:var(--color-primar
 html.mk-apple-layout-enabled header .nav-links a.active::before{opacity:1}
 html.mk-apple-layout-enabled header .nav-links a:hover{transform:translateX(2px);background:var(--mk-apple-chip)!important}
 html.mk-apple-layout-enabled header .search-bar{width:100%}
-html.mk-apple-layout-enabled header .search-bar input{width:100%!important;padding:12px 16px!important;border-radius:16px!important;border:1px solid var(--mk-apple-line)!important;background:var(--mk-apple-surface-strong)!important;box-shadow:inset 0 1px 0 rgba(255,255,255,.78)!important;color:var(--text-color)!important}
+html.mk-apple-layout-enabled header .search-bar input{width:100%!important;padding:12px 16px!important;border-radius:16px!important;border:1px solid var(--mk-apple-line)!important;background:var(--mk-apple-surface-strong)!important;color:var(--text-color)!important}
 html.mk-apple-layout-enabled header .search-bar input:focus{width:100%!important;border-color:rgba(250,35,59,.28)!important;outline:0!important}
 html.mk-apple-layout-enabled header .search-bar input::placeholder{color:var(--mk-apple-text-subtle)}
 html.mk-apple-layout-enabled header .profile{width:100%!important;min-height:68px;height:auto!important;padding:10px 12px!important;border-radius:20px!important;display:flex!important;align-items:center!important;gap:12px!important;box-sizing:border-box;background:linear-gradient(135deg,rgba(250,35,59,.14),var(--mk-apple-surface-soft))!important;box-shadow:var(--mk-apple-shadow-soft)!important}
@@ -45,7 +45,7 @@ html.mk-apple-layout-enabled .artist,html.mk-apple-layout-enabled .playlist-desc
 html.mk-apple-layout-enabled .action-button,html.mk-apple-layout-enabled .batch-select-btn,html.mk-apple-layout-enabled .category-tabs button,html.mk-apple-layout-enabled .extension-btn,html.mk-apple-layout-enabled .play-btn,html.mk-apple-layout-enabled .quality-badge,html.mk-apple-layout-enabled .sort-btn,html.mk-apple-layout-enabled .tab-btn,html.mk-apple-layout-enabled .view-mode-btn,html.mk-apple-layout-enabled button{border-radius:999px!important}
 html.mk-apple-layout-enabled .action-button,html.mk-apple-layout-enabled .batch-select-btn,html.mk-apple-layout-enabled .category-tabs button,html.mk-apple-layout-enabled .extension-btn,html.mk-apple-layout-enabled .play-btn,html.mk-apple-layout-enabled .sort-btn,html.mk-apple-layout-enabled .tab-btn,html.mk-apple-layout-enabled .view-mode-btn{border:1px solid var(--mk-apple-line)!important;background:var(--mk-apple-surface-strong)!important;box-shadow:var(--mk-apple-shadow-soft)!important;color:var(--text-color)!important}
 html.mk-apple-layout-enabled .action-button,html.mk-apple-layout-enabled .category-tabs button.active,html.mk-apple-layout-enabled .extension-btn.primary,html.mk-apple-layout-enabled .extension-btn.success,html.mk-apple-layout-enabled .play-btn,html.mk-apple-layout-enabled .tab-btn.active{background:linear-gradient(135deg,#ff556d,#fa233b)!important;border-color:rgba(250,35,59,.35)!important;color:#fff!important}
-html.mk-apple-layout-enabled .market-search input,html.mk-apple-layout-enabled input[type=search],html.mk-apple-layout-enabled input[type=text]{border-radius:16px!important;border:1px solid var(--mk-apple-line)!important;background:var(--mk-apple-surface-strong)!important;box-shadow:inset 0 1px 0 rgba(255,255,255,.8)!important;color:var(--text-color)!important}
+html.mk-apple-layout-enabled .market-search input,html.mk-apple-layout-enabled input[type=search],html.mk-apple-layout-enabled input[type=text]{border-radius:16px!important;background:var(--mk-apple-surface-strong)!important;color:var(--text-color)!important}
 html.mk-apple-layout-enabled .player-container{bottom:18px!important;padding:10px 14px 14px!important;border-radius:calc(var(--mk-apple-radius-xl) + 2px)!important;border:1px solid var(--mk-apple-border)!important;background:var(--mk-apple-surface)!important;box-shadow:var(--mk-apple-shadow)!important;backdrop-filter:blur(calc(var(--mk-apple-blur) * 0.85)) saturate(1.25)!important;-webkit-backdrop-filter:blur(calc(var(--mk-apple-blur) * 0.85)) saturate(1.25)!important;overflow:hidden!important;z-index:12!important}
 html.mk-apple-layout-enabled .player-bar{max-width:none!important;padding:18px 20px 10px!important;gap:18px!important}
 html.mk-apple-layout-enabled .progress-bar{background:rgba(var(--mk-apple-ink),.12)!important;border-radius:999px!important}
@@ -237,3 +237,72 @@ html.mk-apple-layout-enabled .ranking-container .album{margin-right:16px!importa
 html.mk-apple-layout-enabled .discover-new-song-content .song-list, html.mk-apple-layout-enabled .song-list{display:block!important;grid-template-columns:none!important;gap:0!important;margin-top:0!important}
 html.mk-apple-layout-enabled main>.container>.song-list{display:grid!important;grid-template-columns:repeat(auto-fit,minmax(146px,1fr))!important;gap:14px!important;margin-top:0!important}
 html.mk-apple-layout-enabled .discover-new-song-content .result-item{width:100%!important;box-sizing:border-box!important}
+html.mk-apple-layout-enabled .main-content-shell{width:100%!important;max-width:none!important;margin:0!important;overflow:visible!important}
+html.mk-apple-layout-enabled .page-route-view{width:100%!important;overflow:visible!important}
+html.mk-apple-layout-enabled main.app-main-scroll{box-sizing:border-box!important;overflow-y:auto!important;overflow-x:hidden!important;padding:28px 28px 150px!important}
+html.mk-apple-layout-enabled main.app-main-scroll:has(.settings-page){padding:0!important;background:0 0!important;border:none!important;box-shadow:none!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important}
+html.mk-apple-layout-enabled main.app-main-scroll:has(.settings-page) .main-content-shell{height:auto!important;min-height:calc(100vh - 210px)!important}
+html.mk-apple-layout-top main.app-main-scroll{height:calc(100vh - 66px)!important;margin:48px 18px 18px calc(var(--mk-apple-sidebar-effective, var(--mk-apple-sidebar-width)) + 32px)!important}
+html.mk-apple-layout-side{--mk-apple-side-current:252px}
+html.mk-apple-layout-side:has(.side-navigation.collapsed){--mk-apple-side-current:72px}
+html.mk-apple-layout-side .side-navigation{position:fixed!important;top:48px!important;left:18px!important;bottom:18px!important;width:var(--mk-apple-side-current)!important;min-width:0!important;padding:0!important;background:var(--mk-apple-surface)!important;border:1px solid var(--mk-apple-border)!important;border-radius:calc(var(--mk-apple-radius-xl) + 4px)!important;box-shadow:var(--mk-apple-shadow)!important;backdrop-filter:blur(var(--mk-apple-blur)) saturate(1.3)!important;-webkit-backdrop-filter:blur(var(--mk-apple-blur)) saturate(1.3)!important;overflow:visible!important;z-index:30!important}
+html.mk-apple-layout-side .side-top-actions{position:fixed!important;top:18px!important;left:calc(var(--mk-apple-side-current) + 36px)!important;right:18px!important;height:46px!important;padding:0 14px!important;border:1px solid var(--mk-apple-border)!important;border-radius:22px!important;background:var(--mk-apple-surface)!important;box-shadow:var(--mk-apple-shadow-soft)!important;backdrop-filter:blur(calc(var(--mk-apple-blur) * .75)) saturate(1.2)!important;-webkit-backdrop-filter:blur(calc(var(--mk-apple-blur) * .75)) saturate(1.2)!important;z-index:31!important}
+html.mk-apple-layout-side .side-top-actions::before{inset:0 100px 0 0!important}
+html.mk-apple-layout-side .side-action-buttons{gap:8px!important}
+html.mk-apple-layout-side .side-action-button,html.mk-apple-layout-side .side-refresh-button,html.mk-apple-layout-side .side-profile-menu-button{background:var(--mk-apple-chip)!important;color:var(--text-color)!important;border-radius:12px!important;box-shadow:none!important}
+html.mk-apple-layout-side .side-action-button{width:34px!important;height:34px!important}
+html.mk-apple-layout-side .side-action-button:hover,html.mk-apple-layout-side .side-refresh-button:hover,html.mk-apple-layout-side .side-profile-menu-button:hover{background:rgba(250,35,59,.12)!important;color:var(--color-primary)!important}
+html.mk-apple-layout-side .side-top-search{height:34px!important;flex:0 0 34px!important;border-radius:17px!important;background:var(--mk-apple-chip)!important;color:var(--mk-apple-text-subtle)!important}
+html.mk-apple-layout-side .side-top-search:hover,html.mk-apple-layout-side .side-top-search:focus-within{flex-basis:240px!important;padding:0 12px!important;border-color:rgba(250,35,59,.2)!important;background:var(--mk-apple-surface-strong)!important}
+html.mk-apple-layout-side .side-top-search input{color:var(--text-color)!important}
+html.mk-apple-layout-side .side-profile{min-height:74px!important;padding:14px!important;border-bottom:1px solid var(--mk-apple-line)!important}
+html.mk-apple-layout-side .side-profile-link>img{width:44px!important;height:44px!important;border-radius:14px!important}
+html.mk-apple-layout-side .side-profile-info span{color:var(--text-color)!important}
+html.mk-apple-layout-side .side-profile-info small,html.mk-apple-layout-side .side-section-title,html.mk-apple-layout-side .side-playlist-tabs,html.mk-apple-layout-side .side-playlist-empty{color:var(--mk-apple-text-subtle)!important}
+html.mk-apple-layout-side .side-navigation-main{padding:16px 14px 0!important;overflow:hidden!important}
+html.mk-apple-layout-side .side-search{height:42px!important;margin-bottom:16px!important;padding:0 12px!important;border:1px solid var(--mk-apple-line)!important;border-radius:16px!important;background:var(--mk-apple-surface-strong)!important;color:var(--mk-apple-text-subtle)!important;box-shadow:inset 0 1px 0 rgba(255,255,255,.72)!important}
+html.mk-apple-layout-side .side-search input{color:var(--text-color)!important}
+html.mk-apple-layout-side .side-section{gap:6px!important;margin-bottom:18px!important}
+html.mk-apple-layout-side .side-link{min-height:42px!important;padding:0 12px!important;border-radius:16px!important;color:var(--text-color)!important;background:0 0!important}
+html.mk-apple-layout-side .side-link i{color:var(--color-primary)!important}
+html.mk-apple-layout-side .side-link:hover,html.mk-apple-layout-side .side-link.active,html.mk-apple-layout-side .side-link.router-link-exact-active{background:linear-gradient(135deg,rgba(250,35,59,.14),rgba(255,255,255,.34))!important;color:var(--color-primary)!important}
+html.dark.mk-apple-layout-side .side-link:hover,html.dark.mk-apple-layout-side .side-link.active,html.dark.mk-apple-layout-side .side-link.router-link-exact-active{background:rgba(250,35,59,.16)!important}
+html.mk-apple-layout-side .side-playlist-list{gap:6px!important;padding-right:0!important}
+html.mk-apple-layout-side .side-playlist-link img{border-radius:10px!important}
+html.mk-apple-layout-side .side-profile-menu{left:calc(var(--mk-apple-side-current) - 28px)!important;top:58px!important;width:180px!important;padding:10px!important;border:1px solid var(--mk-apple-line)!important;border-radius:18px!important;background:var(--mk-apple-surface-strong)!important;box-shadow:var(--mk-apple-shadow-soft)!important;backdrop-filter:blur(calc(var(--mk-apple-blur) * .65)) saturate(1.2)!important;-webkit-backdrop-filter:blur(calc(var(--mk-apple-blur) * .65)) saturate(1.2)!important}
+html.mk-apple-layout-side .side-profile-menu li a{border-radius:12px!important;color:var(--text-color)!important}
+html.mk-apple-layout-side .side-profile-menu li a:hover{background:var(--mk-apple-chip)!important}
+html.mk-apple-layout-side .side-navigation.collapsed .side-navigation-main{padding-left:10px!important;padding-right:10px!important}
+html.mk-apple-layout-side .side-navigation.collapsed .side-link{justify-content:center!important;padding:0!important}
+html.mk-apple-layout-side .side-navigation.collapsed .side-search{justify-content:center!important;padding:0!important}
+html.mk-apple-layout-side main.app-main-scroll{width:auto!important;height:calc(100vh - 100px)!important;margin:82px 18px 18px calc(var(--mk-apple-side-current) + 36px)!important;padding:28px 28px 150px!important}
+html.mk-apple-layout-side .player-container{left:calc(var(--mk-apple-side-current) + 36px)!important;right:18px!important;width:auto!important}
+html.mk-apple-layout-side body.player-bar-content-layout .player-container{left:calc(var(--mk-apple-side-current) + 36px)!important;width:auto!important}
+@media (min-width:841px){html.mk-apple-layout-enabled .page-route-view>.container>.recommendations{display:flex!important;grid-template-columns:none!important;gap:35px!important;margin-bottom:40px!important}
+html.mk-apple-layout-enabled .page-route-view>.container>.song-list{display:grid!important;grid-template-columns:repeat(auto-fit,minmax(146px,1fr))!important;gap:14px!important;margin-top:0!important}
+}
+@media (max-width:840px){html.mk-apple-layout-side{--mk-apple-side-current:100%}
+html.mk-apple-layout-side .side-navigation{top:18px!important;left:18px!important;right:18px!important;bottom:auto!important;width:auto!important;max-height:calc(100vh - 140px)!important}
+html.mk-apple-layout-side .side-top-actions{top:auto!important;left:18px!important;right:18px!important;bottom:18px!important}
+html.mk-apple-layout-side main.app-main-scroll{height:auto!important;min-height:calc(100vh - 36px)!important;margin:150px 18px 120px!important}
+html.mk-apple-layout-side .player-container{left:18px!important;right:18px!important}
+}
+html.mk-apple-layout-enabled main.app-main-scroll{background:var(--mk-apple-surface)!important}
+html.mk-apple-layout-top main,html.mk-apple-layout-top main.app-main-scroll{width:auto!important;max-width:none!important}
+html.mk-apple-layout-enabled main.app-main-scroll>.main-content-shell,html.mk-apple-layout-enabled .page-route-view,html.mk-apple-layout-enabled .page-route-view>.container{min-height:100%!important;box-sizing:border-box!important}
+html.mk-apple-layout-enabled .page-route-view>.container{padding-bottom:32px!important}
+html.mk-apple-layout-enabled .page-route-view>.container>.home-recommendations-section .recommendations{display:block!important;grid-template-columns:none!important;gap:0!important}
+html.mk-apple-layout-enabled .page-route-view>.container>.home-recommendations-section .recommendations-layout{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:18px!important;align-items:stretch!important;min-height:184px!important}
+html.mk-apple-layout-enabled .page-route-view>.container>.home-recommendations-section .recommend-card{width:100%!important;min-width:0!important;height:184px!important;box-sizing:border-box!important}
+html.mk-apple-layout-enabled .page-route-view>.container>.home-recommendations-section .icon-recommend-card{overflow:hidden!important}
+html.mk-apple-layout-enabled .page-route-view>.container>.song-list{display:grid!important;grid-template-columns:repeat(auto-fit,minmax(220px,1fr))!important;gap:14px!important;margin-top:0!important;margin-bottom:34px!important}
+html.mk-apple-layout-enabled .page-route-view>.container>.song-list>.song-item{width:auto!important;max-width:100%!important;box-sizing:border-box!important}
+@media (max-width:1180px){html.mk-apple-layout-enabled .page-route-view>.container>.home-recommendations-section .recommendations-layout{grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:14px!important}
+html.mk-apple-layout-enabled .page-route-view>.container>.song-list{grid-template-columns:repeat(auto-fit,minmax(190px,1fr))!important}
+}
+@media (max-width:840px){html.mk-apple-layout-enabled .page-route-view>.container>.home-recommendations-section .recommendations-layout{grid-template-columns:1fr!important;min-height:0!important}
+html.mk-apple-layout-enabled .page-route-view>.container>.home-recommendations-section .recommend-card{height:184px!important}
+html.mk-apple-layout-enabled .page-route-view>.container>.song-list{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+}
+@media (max-width:576px){html.mk-apple-layout-enabled .page-route-view>.container>.song-list{grid-template-columns:1fr!important}
+}
