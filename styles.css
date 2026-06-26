@@ -306,3 +306,5 @@ html.mk-apple-layout-enabled .page-route-view>.container>.song-list{grid-templat
 }
 @media (max-width:576px){html.mk-apple-layout-enabled .page-route-view>.container>.song-list{grid-template-columns:1fr!important}
 }
+html.mk-apple-layout-enabled .titlebar{-webkit-app-region:drag!important}
+html.mk-apple-layout-enabled .titlebar .window-controls,html.mk-apple-layout-enabled .titlebar .control-button{-webkit-app-region:no-drag!important}
