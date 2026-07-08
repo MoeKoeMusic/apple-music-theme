@@ -38,7 +38,7 @@ html.dark.mk-apple-layout-enabled .queue-item,html.dark.mk-apple-layout-enabled 
 html.mk-apple-layout-enabled .song-item,html.mk-apple-layout-enabled .track-list .li{margin-bottom:10px!important}
 html.mk-apple-layout-enabled .song-item{padding:10px 12px!important}
 html.mk-apple-layout-enabled .track-list .li{padding-inline:14px!important}
-html.mk-apple-layout-enabled .track-list-header-row{position:sticky!important;top:0!important;z-index:4!important;margin-bottom:10px!important;background:var(--mk-apple-surface-strong)!important;border:1px solid var(--mk-apple-line)!important;border-radius:18px!important;box-shadow:0 10px 24px rgba(17,19,26,.06)!important;backdrop-filter:blur(14px) saturate(1.15)!important;-webkit-backdrop-filter:blur(14px) saturate(1.15)!important}
+html.mk-apple-layout-enabled .track-list-header-row{position:sticky!important;top:0;z-index:4!important;margin-bottom:10px!important;background:var(--mk-apple-surface-strong)!important;border:1px solid var(--mk-apple-line)!important;border-radius:18px!important;box-shadow:0 10px 24px rgba(17,19,26,.06)!important;backdrop-filter:blur(14px) saturate(1.15)!important;-webkit-backdrop-filter:blur(14px) saturate(1.15)!important}
 html.mk-apple-layout-enabled .track-list{padding-top:8px!important}
 html.mk-apple-layout-enabled .album-name,html.mk-apple-layout-enabled .playlist-title,html.mk-apple-layout-enabled .queue-song-title,html.mk-apple-layout-enabled .track-title,html.mk-apple-layout-enabled .track-title-text{color:var(--text-color)!important}
 html.mk-apple-layout-enabled .artist,html.mk-apple-layout-enabled .playlist-description,html.mk-apple-layout-enabled .queue-artist,html.mk-apple-layout-enabled .singer-name,html.mk-apple-layout-enabled .song-artist,html.mk-apple-layout-enabled .track-album,html.mk-apple-layout-enabled .track-artist,html.mk-apple-layout-enabled .track-size,html.mk-apple-layout-enabled .track-timelen{color:var(--mk-apple-text-subtle)!important}
@@ -193,17 +193,17 @@ html.mk-apple-layout-enabled .discover-floating-arona{display:none!important}
 html.mk-apple-layout-enabled{--mk-apple-player-clearance:60px}
 html.mk-apple-layout-enabled #app{padding-bottom:var(--mk-apple-player-clearance)!important;box-sizing:border-box!important}
 html.mk-apple-layout-enabled main{margin-bottom:18px!important}
-html.mk-apple-layout-enabled .detail-page:has(.cover-art) .header{align-items:center!important;margin-bottom:40px!important;overflow:visible!important}
-html.mk-apple-layout-enabled .detail-page:has(.cover-art) .info{position:relative!important;z-index:2!important;overflow:visible!important}
+html.mk-apple-layout-enabled .detail-page:has(.cover-art) .header{align-items:flex-start!important;margin-bottom:0!important;overflow:visible!important}
+html.mk-apple-layout-enabled .detail-page:has(.cover-art) .info{position:relative!important;z-index:2!important;overflow:visible}
 html.mk-apple-layout-enabled .detail-page:has(.cover-art) .actions{position:relative!important;z-index:3!important;overflow:visible!important}
 html.mk-apple-layout-enabled .detail-page:has(.cover-art) .more-btn-container{position:relative!important;z-index:4!important}
-html.mk-apple-layout-enabled .detail-page:has(.cover-art) .cover-art{width:200px!important;height:200px!important;margin-right:20px!important;border-radius:10px!important;box-shadow:0 0 10px rgba(0,0,0,.1)!important;object-fit:cover!important;transform:none!important}
+html.mk-apple-layout-enabled .detail-page:has(.cover-art) .cover-art{width:200px;height:200px;margin-right:20px!important;border-radius:10px!important;box-shadow:0 0 10px rgba(0,0,0,.1)!important;object-fit:cover!important;transform:none!important}
 html.mk-apple-layout-enabled .detail-page:has(.cover-art) .artist-avatar{border-radius:50%!important}
 html.mk-apple-layout-enabled .detail-page:has(.cover-art) .title{color:var(--primary-color)!important;letter-spacing:normal!important}
 html.mk-apple-layout-enabled .detail-page:has(.cover-art) .subtitle{color:#666!important}
 html.mk-apple-layout-enabled .detail-page:has(.cover-art) .meta{color:#999!important}
 html.mk-apple-layout-enabled .detail-page:has(.cover-art) .track-list-container{margin-top:30px!important;background:0 0!important;border:none!important;border-radius:0!important;box-shadow:none!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important}
-html.mk-apple-layout-enabled .detail-page:has(.cover-art) .track-list-title{color:var(--primary-color)!important;font-size:24px!important;margin-bottom:10px!important;letter-spacing:normal!important}
+html.mk-apple-layout-enabled .detail-page:has(.cover-art) .track-list-title{color:var(--primary-color)!important;font-size:24px;margin-bottom:10px;letter-spacing:normal!important}
 html.mk-apple-layout-enabled .detail-page:has(.cover-art) .track-list-actions{gap:10px!important}
 html.mk-apple-layout-enabled .detail-page:has(.cover-art) .batch-action-btn,html.mk-apple-layout-enabled .detail-page:has(.cover-art) .fav-btn,html.mk-apple-layout-enabled .detail-page:has(.cover-art) .more-btn,html.mk-apple-layout-enabled .detail-page:has(.cover-art) .view-mode-btn{background:0 0!important;border:1px solid var(--secondary-color)!important;border-radius:5px!important;box-shadow:none!important;color:var(--text-color)!important}
 html.mk-apple-layout-enabled .detail-page:has(.cover-art) .follow-btn,html.mk-apple-layout-enabled .detail-page:has(.cover-art) .primary-btn{background:#ff69b4!important;border:none!important;border-radius:5px!important;box-shadow:none!important;color:#fff!important}
@@ -211,8 +211,8 @@ html.mk-apple-layout-enabled .detail-page:has(.cover-art) .batch-action-btn.acti
 html.mk-apple-layout-enabled .detail-page:has(.cover-art) .sort-selector{border:1px solid var(--secondary-color)!important;border-radius:5px!important;overflow:hidden!important}
 html.mk-apple-layout-enabled .detail-page:has(.cover-art) .sort-btn{background:0 0!important;border:none!important;border-radius:0!important;box-shadow:none!important;color:var(--text-color)!important}
 html.mk-apple-layout-enabled .detail-page:has(.cover-art) .search-input{width:250px!important;padding:8px 8px 8px 15px!important;border:1px solid var(--secondary-color)!important;border-radius:20px!important;background:0 0!important;box-shadow:none!important}
-html.mk-apple-layout-enabled .detail-page:has(.cover-art) .track-list-header-row{position:static!important;top:auto!important;padding:10px!important;border:none!important;border-bottom:1px solid var(--primary-color)!important;border-radius:5px 5px 0 0!important;background-color:#00000000!important;box-shadow:none!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important}
-html.mk-apple-layout-enabled .detail-page:has(.cover-art) .track-list{height:800px!important;padding-top:0!important}
+html.mk-apple-layout-enabled .detail-page:has(.cover-art) .track-list-header-row{position:sticky!important;top:0;padding:10px!important;border:none!important;border-bottom:1px solid var(--primary-color)!important;border-radius:5px 5px 0 0!important;box-shadow:none!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important}
+html.mk-apple-layout-enabled .detail-page:has(.cover-art) .track-list{min-height:800px!important;height:auto!important;padding-top:0!important}
 html.mk-apple-layout-enabled .detail-page:has(.cover-art) .track-list .li{margin-bottom:0!important;padding:10px!important;border:none!important;border-bottom:1px solid #eee!important;border-radius:5px!important;background:0 0!important;box-shadow:none!important}
 html.mk-apple-layout-enabled .detail-page:has(.cover-art) .track-list .li:hover{transform:none!important;background:var(--background-color)!important;box-shadow:none!important}
 html.mk-apple-layout-enabled .detail-page:has(.cover-art) .li.cover-view{height:60px!important;padding:5px 10px!important;border-radius:5px!important}
@@ -275,7 +275,7 @@ html.mk-apple-layout-side .side-profile-menu li a:hover{background:var(--mk-appl
 html.mk-apple-layout-side .side-navigation.collapsed .side-navigation-main{padding-left:10px!important;padding-right:10px!important}
 html.mk-apple-layout-side .side-navigation.collapsed .side-link{justify-content:center!important;padding:0!important}
 html.mk-apple-layout-side .side-navigation.collapsed .side-search{justify-content:center!important;padding:0!important}
-html.mk-apple-layout-side main.app-main-scroll{width:auto!important;height:calc(100vh - 100px)!important;margin:82px 18px 18px calc(var(--mk-apple-side-current) + 36px)!important;padding:28px 28px 150px!important}
+html.mk-apple-layout-side main.app-main-scroll{width:auto!important;height:calc(100vh - 100px)!important;margin:82px 18px 18px calc(var(--mk-apple-side-current) + 36px)!important;padding:0px 28px 150px!important}
 html.mk-apple-layout-side .player-container{left:calc(var(--mk-apple-side-current) + 36px)!important;right:18px!important;width:auto!important}
 html.mk-apple-layout-side body.player-bar-content-layout .player-container{left:calc(var(--mk-apple-side-current) + 36px)!important;width:auto!important}
 @media (min-width:841px){html.mk-apple-layout-enabled .page-route-view>.container>.recommendations{display:flex!important;grid-template-columns:none!important;gap:35px!important;margin-bottom:40px!important}
