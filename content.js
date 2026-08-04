@@ -283,6 +283,16 @@
 
   const applyTheme = () => {
     const enabled = currentConfig.enabled && !isExcludedRoute();
+
+    //插件禁用时清理
+    if (!enabled) {
+      document.querySelectorAll(".context-menu").forEach((menu) => {
+        if (menu.parentElement === document.body) {
+          menu.remove();
+        }
+      });
+    }
+
     document.documentElement.classList.toggle(ENABLED_CLASS, enabled);
     const mode = syncLayoutMode(enabled);
 
@@ -346,6 +356,12 @@
   });
 
   window.addEventListener("hashchange", () => {
+    //路由切换同步清理
+    document.querySelectorAll(".context-menu").forEach((menu) => {
+      if (menu.parentElement === document.body) {
+        menu.remove();
+      }
+    });
     scheduleApply();
     window.setTimeout(scheduleApply, 0);
   }, { passive: true });
@@ -360,6 +376,12 @@
     const target = event.target;
     if (!(target instanceof Element)) return;
     if (!target.closest("header .nav-links a, .profile-menu a, .mk-apple-side-link, .side-navigation a, .side-profile-menu a, .side-profile-menu-button, .side-action-button")) return;
+    //导航点击时清理
+    document.querySelectorAll(".context-menu").forEach((menu) => {
+      if (menu.parentElement === document.body) {
+        menu.remove();
+      }
+    });
     window.setTimeout(scheduleApply, 0);
   }, true);
 
